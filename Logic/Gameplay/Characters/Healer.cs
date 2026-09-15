@@ -1,13 +1,13 @@
 namespace GuildManager.Logic.Gameplay.Characters;
 
-/// <summary>
-/// Recrue générique — classe Healeur (GDD 5.4).
-/// Silhouette de base : robe blanche/or, symbole sacré, orbe de soin.
-/// </summary>
-public sealed class Healer : Adventurer
+public sealed class Healer : Adventurer, ISupportRecruit
 {
+    public double MultiplicateurGroupe => 1.2;
+
     public Healer(string nom) : base(nom, pointsDeVie: 28)
     {
-        TauxReussiteBase = 50; 
+        TauxReussiteBase = 0; 
     }
+
+    public override int CalculerTauxReussite(int difficulteQuete) => 0;
 }

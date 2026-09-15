@@ -1,10 +1,6 @@
 namespace GuildManager.Logic.Gameplay.Characters;
 
-/// <summary>
-/// Elowen — haute-elfe archère et rôdeuse (GDD 5.1 / 5.3).
-/// Nouvelle recrue spéciale sans passé commun avec le joueur ; sa connexion à la
-/// nature lui permet de percevoir les premiers signes du miasme avant quiconque.
-/// </summary>
+
 public sealed class Elowen : SpecialAdventurer
 {
     public Elowen() : base(
