@@ -1,0 +1,33 @@
+{
+  "Day": 4,
+  "RemainingHours": 6,
+  "Gold": 1250,
+  "Food": 12,
+  "HealthPotions": 7,
+  "Reputation": 30,
+  "CurrentVoice": "Serious",
+  "SwitchAlreadyTriggered": false,
+  "Roster": [
+    {
+      "Name": "Sameth",
+      "Type": "Sameth",
+      "Level": 1,
+      "Experience": 0,
+      "HealthPoints": 30
+    },
+    {
+      "Name": "Meloap",
+      "Type": "Meloap",
+      "Level": 2,
+      "Experience": 40,
+      "HealthPoints": 50
+    },
+    {
+      "Name": "Elara",
+      "Type": "Healer",
+      "Level": 1,
+      "Experience": 15,
+      "HealthPoints": 28
+    }
+  ]
+}
