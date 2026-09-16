@@ -1,0 +1,29 @@
+[
+  {
+    "Nom": "Sameth",
+    "Type": "Sameth",
+    "PointsDeVie": 30,
+    "TauxReussiteBase": 82,
+    "Histoire": "Marchand-mage repenti, jadis possédé par Hedge lors de l'attaque de l'ancienne Guilde. Exorcisé au sommet de Tartaros, il rejoint la nouvelle guilde comme marchand et conseiller.",
+    "TexteSerieux": "Je reconnais ce symbole... c'est celui de Hedge. Le miasme n'a jamais vraiment disparu.",
+    "TexteWtf": "Regardez ces reliques authentiques ! Enfin, authentiques depuis hier soir, mais qui vérifie vraiment ?"
+  },
+  {
+    "Nom": "Meloap",
+    "Type": "Meloap",
+    "PointsDeVie": 50,
+    "TauxReussiteBase": 88,
+    "Histoire": "Aventurier homme-lézard, allié du joueur depuis ses tout premiers pas à la Guilde de Fadriann. Toujours prêt à soutenir les recrues sur le terrain.",
+    "TexteSerieux": "Un ancien compagnon de l'expédition à Tartaros a disparu. Je crains que ce ne soit pas une coïncidence.",
+    "TexteWtf": "Ce cochon porte manifestement les habits d'un noble étranger. Traitons-le avec tous les honneurs."
+  },
+  {
+    "Nom": "Elowen",
+    "Type": "Elowen",
+    "PointsDeVie": 32,
+    "TauxReussiteBase": 85,
+    "Histoire": "Haute-elfe archère et rôdeuse, rejoint la guilde comme sentinelle discrète capable de détecter les prémices du miasme dans la végétation.",
+    "TexteSerieux": "La forêt murmure des choses inquiétantes, ces derniers temps. Le miasme progresse plus vite qu'il ne devrait.",
+    "TexteWtf": "Le Pigeon dit qu'il porte un message royal urgent. Je le traduis fidèlement : il ment, mais avec panache."
+  }
+]
