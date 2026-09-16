@@ -1,27 +1,24 @@
 namespace GuildManager.Logic.Gameplay.Characters;
 
-/// <summary>
-/// Sameth — marchand-mage repenti (GDD 5.1 / 5.3).
-/// Ami de longue date du joueur, révélé possédé par Hedge durant le Prologue
-/// (l'expédition à Tartaros), responsable de l'attaque contre l'ancienne Guilde.
-/// Une fois exorcisé, il rejoint la nouvelle guilde comme marchand et conseiller.
-/// </summary>
+// Sameth - repentant merchant-mage.
+// Long-time friend of the player, revealed to have been possessed by Hedge
+// during the Prologue (the Tartaros expedition), responsible for the attack
+// on the old Guild. Once exorcised, he joins the new guild as a merchant and
+// advisor. His actual lines live in Data/dialogues.json (see Speak()).
+// FR : Sameth — marchand-mage repenti, jadis possédé par Hedge, exorcisé au
+// sommet de Tartaros. Ses répliques vivent dans Data/dialogues.json.
 public sealed class Sameth : SpecialAdventurer
 {
+    // Creates Sameth with his fixed lore, stats and backstory.
+    // FR : Crée Sameth avec son lore, ses stats et son histoire fixes.
     public Sameth() : base(
-        nom: "Sameth",
-        pointsDeVie: 30,
-        histoire: "Marchand-mage repenti, jadis possédé par Hedge lors de l'attaque de " +
-                  "l'ancienne Guilde. Exorcisé au sommet de Tartaros, il rejoint la nouvelle " +
-                  "guilde comme marchand et conseiller, hanté par la culpabilité de ce qu'il " +
-                  "a fait sous l'emprise du miasme.")
+        name: "Sameth",
+        healthPoints: 30,
+        backstory: "Repentant merchant-mage, once possessed by Hedge during the attack " +
+                   "on the old Guild. Exorcised atop Tartaros, he joins the new guild as " +
+                   "a merchant and advisor, haunted by guilt over what he did under the " +
+                   "miasma's influence.")
     {
-        TauxReussiteBase = 82; // aventurier spécial : fiabilité élevée, indépendante du niveau (> 80%)
+        BaseSuccessRate = 82; // special adventurer: high reliability (> 80%)
     }
-
-    public override string ObtenirTexteSerieux() =>
-        "Je reconnais ce symbole... c'est celui de Hedge. Le miasme n'a jamais vraiment disparu.";
-
-    public override string ObtenirTexteWtf() =>
-        "Regardez ces reliques authentiques ! Enfin, authentiques depuis hier soir, mais qui vérifie vraiment ?";
 }

@@ -1,20 +1,21 @@
 namespace GuildManager.Logic.Gameplay.Characters;
 
-
+// Elowen - high elf archer and ranger.
+// New special recruit with no shared history with the player; her connection
+// to nature lets her sense the miasma's first signs before anyone else.
+// Her lines live in Data/dialogues.json (see Speak()).
+// FR : Elowen — haute-elfe archère et rôdeuse, nouvelle recrue sans passé commun.
+// Ses répliques vivent dans Data/dialogues.json.
 public sealed class Elowen : SpecialAdventurer
 {
+    // Creates Elowen with her fixed lore, stats and backstory.
+    // FR : Crée Elowen avec son lore, ses stats et son histoire fixes.
     public Elowen() : base(
-        nom: "Elowen",
-        pointsDeVie: 32,
-        histoire: "Haute-elfe archère et rôdeuse, rejoint la guilde comme sentinelle " +
-                  "discrète capable de détecter les prémices du miasme dans la végétation.")
+        name: "Elowen",
+        healthPoints: 32,
+        backstory: "High elf archer and ranger, joins the guild as a quiet sentinel " +
+                   "able to detect the miasma's first signs in the vegetation.")
     {
-        TauxReussiteBase = 85; // aventurière spéciale : fiabilité élevée (> 80%)
+        BaseSuccessRate = 85; // special adventurer: high reliability (> 80%)
     }
-
-    public override string ObtenirTexteSerieux() =>
-        "La forêt murmure des choses inquiétantes, ces derniers temps. Le miasme progresse plus vite qu'il ne devrait.";
-
-    public override string ObtenirTexteWtf() =>
-        "Le Pigeon dit qu'il porte un message royal urgent. Je le traduis fidèlement : il ment, mais avec panache.";
 }
