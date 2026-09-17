@@ -1,0 +1,186 @@
+<UserControl x:Class="GuildManager.MainMenuView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager">
+
+
+    <!--A changer les Font Family georgia en la police qu'on veut-->
+    <UserControl.Resources>
+        <!-- Style des boutons du menu, façon manuscrit -->
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Georgia" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property= "Foreground" Value="#3D2E18"/>
+            <Setter Property= "Background" Value="Transparent"/>
+            <Setter Property= "BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property= "Margin" Value="0,8"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--A regarder les propriétés trigers-->
+                    <ControlTemplate TargetType="Button">
+                        <!--A regarder pour les backgrounds-->
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#8B1A1A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="#5A0E0E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Texture du parchemin-->
+        <!--Notion à regarder-->
+        <LinearGradientBrush x:Key="ParchmentBrush" StartPoint="0,0" EndPoint="1,0.15">
+            <GradientStop Color="#E8D4A0" Offset="0"/>
+            <GradientStop Color="#F2E4BC" Offset="0.45"/>
+            <GradientStop Color="#E4CE94" Offset="0.75"/>
+            <GradientStop Color="#DEC98A" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Bois/rouleau aux extrémités -->
+        <LinearGradientBrush x:Key="RollBrush" StartPoint="0,0" EndPoint="1,0">
+            <!--On définit les couleurs-->
+            <GradientStop Color="#6E5127" Offset="0"/>
+            <GradientStop Color="#8B6F3E" Offset="0.35"/>
+            <GradientStop Color="#5A4526" Offset="0.7"/>
+            <GradientStop Color="#3D2E18" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Animation : le parchemin s'ouvre symétriquement depuis le centre -->
+        <!--Notion à voir en détail-->
+        <Storyboard x:Key="UnrollStoryboard">
+            <DoubleAnimation Storyboard.TargetName= "ParchmentScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0" To="1"
+                             Duration="0:0:1.3">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <!--Animation pour le côté gauche du parchemin-->
+            <DoubleAnimation Storyboard.TargetName="LeftRollTransform"
+                             Storyboard.TargetProperty="X"
+                             From="0" To="-130"
+                             Duration="0:0:1.3">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <!--Animation pour le côté droit du parchemin-->
+            <DoubleAnimation Storyboard.TargetName="RightRollTransform"
+                             Storyboard.TargetProperty="X"
+                             From="0" To="130"
+                             Duration="0:0:1.3">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <!-- Le contenu du menu apparaît une fois le parchemin déroulé -->
+            <DoubleAnimation Storyboard.TargetName="MenuContent"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1"
+                             BeginTime="0:0:1.1"
+                             Duration="0:0:0.5"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <!--Lancement des informations de Storyboard-->
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource UnrollStoryboard}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <!--Notion du Background à regarder-->
+    <Grid Background="#05030A">
+        <!--Changement de vue-->
+        <Viewbox Stretch="Uniform">
+        <Grid Width="1253" Height="705">
+        <!-- Fond du jeu : artwork "Legacy of Tartaros" -->
+        <Image Source="/GuildManager;component/Assets/Menu.png" Stretch="Fill" Width="1253" Height="705"/>
+
+        <!--Voir pour le Canva-->
+        <Canvas HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Height="300"
+            Margin="0,230,0,0">
+        
+        <!-- Corps du parchemin : grandit symétriquement depuis le centre -->
+        <Border x:Name="ParchmentBody"
+                Canvas.Left="20" Canvas.Top="10"
+                Width="260" Height="280"
+                Background="{StaticResource ParchmentBrush}"
+                BorderBrush="#8B6F3E" BorderThickness="4"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <ScaleTransform x:Name="ParchmentScale" ScaleX="0" ScaleY="1"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="25" ShadowDepth="5" Opacity="0.55" Direction="270"/>
+            </Border.Effect>
+
+            <!--Elements à l'interrieur du Parchemin-->
+            <Grid x:Name="MenuContent" Opacity="0" Margin="20,15">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="MENU PRINCIPAL"
+                        FontFamily="Georgia" FontSize="22" FontWeight="Bold"
+                        Foreground="#3D2E18" HorizontalAlignment="Center" Margin="0,0,0,24"/>
+
+                    <Button Content="Solo" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Online" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Options" Style="{StaticResource MenuButtonStyle}"/>
+                    <!--On définit le Bouton pour quitter le Menu-->
+                    <Button Content="Quitter" Style="{StaticResource MenuButtonStyle}" Click="QuitButton_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Rouleau gauche : part du centre et s'écarte vers la gauche -->
+        <Border x:Name="LeftRoll"
+                Canvas.Left="138" Canvas.Top="0"
+                Width="24" Height="300"
+                CornerRadius="12"
+                Background="{StaticResource RollBrush}"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="LeftRollTransform" X="0"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="12" ShadowDepth="4" Opacity="0.7"/>
+            </Border.Effect>
+        </Border>
+
+        <!-- Rouleau droit : part du centre et s'écarte vers la droite -->
+        <Border x:Name="RightRoll"
+                Canvas.Left="138" Canvas.Top="0"
+                Width="24" Height="300"
+                CornerRadius="12"
+                Background="{StaticResource RollBrush}"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TranslateTransform x:Name="RightRollTransform" X="0"/>
+            </Border.RenderTransform>
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="12" ShadowDepth="4" Opacity="0.7"/>
+            </Border.Effect>
+        </Border>
+
+        </Canvas>
+    </Grid>
+    </Viewbox>
+    </Grid>
+</UserControl>
