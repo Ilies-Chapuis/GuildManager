@@ -35,4 +35,11 @@ public abstract class SpecialAdventurer : Adventurer
     // Flags that this character's unique story event has already happened.
     // FR : Marque que l'événement unique de ce personnage s'est déjà produit.
     public void MarkUniqueEventTriggered() => UniqueEventTriggered = true;
+
+    // Reinjects a previously saved unique-event state (see SaveManager).
+    // FR : Réinjecte un état d'événement unique précédemment sauvegardé (voir SaveManager).
+    public void RestoreSpecialProgress(bool uniqueEventTriggered)
+    {
+        UniqueEventTriggered = uniqueEventTriggered;
+    }
 }
