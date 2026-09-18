@@ -13,21 +13,24 @@
       "Type": "Sameth",
       "Level": 1,
       "Experience": 0,
-      "HealthPoints": 30
+      "HealthPoints": 30,
+      "UniqueEventTriggered": true
     },
     {
       "Name": "Meloap",
       "Type": "Meloap",
       "Level": 2,
       "Experience": 40,
-      "HealthPoints": 50
+      "HealthPoints": 50,
+      "UniqueEventTriggered": false
     },
     {
       "Name": "Elara",
       "Type": "Healer",
       "Level": 1,
       "Experience": 15,
-      "HealthPoints": 28
+      "HealthPoints": 28,
+      "UniqueEventTriggered": false
     }
   ]
 }
