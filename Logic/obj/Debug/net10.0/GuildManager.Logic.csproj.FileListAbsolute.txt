@@ -1,0 +1,11 @@
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\bin\Debug\net10.0\GuildManager.Logic.deps.json
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\bin\Debug\net10.0\GuildManager.Logic.dll
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\bin\Debug\net10.0\GuildManager.Logic.pdb
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.AssemblyInfoInputs.cache
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.AssemblyInfo.cs
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.csproj.CoreCompileInputs.cache
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.dll
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\refint\GuildManager.Logic.dll
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\GuildManager.Logic.pdb
+C:\Users\melvi\OneDrive\Bureau\Guild_Manager\Logic\obj\Debug\net10.0\ref\GuildManager.Logic.dll
