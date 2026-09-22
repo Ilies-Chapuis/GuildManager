@@ -1,0 +1,45 @@
+<UserControl x:Class="GuildManager.UI.QuestBoss.QuestBossView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager"
+        mc:Ignorable="d">
+
+        <UserControl.Resources>
+            <Style x:Key="Quest2BackButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Georgia" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="Background" Value="#D8C08A" />
+                <Setter Property="BorderBrush" Value="#8B6F3E" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Padding" Value="15,5" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+            <!-- Bouton invisible mais cliquable -->
+            
+        </UserControl.Resources>
+
+        <Grid Background="#05030A">
+
+            <Image
+                Source="/GuildManager;component/Assets/Menu_quêtes2.png"
+                Stretch="Fill"
+                Width="1253"
+                Height="705" />
+
+            <Button
+                Content="Retour"
+                Style="{StaticResource Quest2_BackButtonStyle}"
+                Click="ReturnButton_Click"
+                Width="150"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="30" />
+
+
+        </Grid>
+</UserControl>

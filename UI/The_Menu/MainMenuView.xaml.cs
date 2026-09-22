@@ -8,8 +8,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GuildManager.UI.The_LoginSolo;
+using GuildManager.UI.The_MainWindow;
 
-namespace GuildManager;
+namespace GuildManager.UI.The_Menu;
 
 /// <summary>
 /// Interaction logic MainMenuView.xaml for .xaml
@@ -20,12 +22,14 @@ public partial class MainMenuView : UserControl
     {
         InitializeComponent();
     }
-    public void ChangeMainContent(MainMenuView newContent)
-    {
-        Content = newContent;
-    }
     private void QuitButton_Click(object sender, RoutedEventArgs e)
     {
         Application.Current.Shutdown();
+    }
+
+    private void SoloButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+        mainWindow.ChangeMainContent(new LoginViewSolo());
     }
 }

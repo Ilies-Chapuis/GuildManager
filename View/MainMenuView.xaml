@@ -1,4 +1,4 @@
-<UserControl x:Class="GuildManager.MainMenuView"
+<UserControl x:Class="GuildManager.UI.The_Menu.MainMenuView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -140,7 +140,9 @@
                         FontFamily="Georgia" FontSize="22" FontWeight="Bold"
                         Foreground="#3D2E18" HorizontalAlignment="Center" Margin="0,0,0,24"/>
 
-                    <Button Content="Solo" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Solo"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Click="SoloButton_Click" />
                     <Button Content="Online" Style="{StaticResource MenuButtonStyle}"/>
                     <Button Content="Options" Style="{StaticResource MenuButtonStyle}"/>
                     <!--On définit le Bouton pour quitter le Menu-->

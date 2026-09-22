@@ -10,6 +10,11 @@
 
   <ItemGroup>
     <Resource Include="Assets\Menu.png" />
+    <Resource Include="Assets\Guild_sprites.png" />
+    <Resource Include="Assets\Menu_quêtes.png" />
+    <Resource Include="Assets\Inventaire.png" />
+    <Resource Include="Assets\Recrutements.png" />
+    <Resource Include="Assets\Menu_quêtes2.png" />
   </ItemGroup>
 
 </Project>

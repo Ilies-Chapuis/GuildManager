@@ -1,4 +1,4 @@
-<Window x:Class="GuildManager.LoginViewSolo"
+<UserControl x:Class="GuildManager.UI.The_LoginSolo.LoginViewSolo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,74 +6,223 @@
         xmlns:local="clr-namespace:GuildManager"
         mc:Ignorable="d">
 
+        <UserControl.Resources>
+                <!--Storyboard permet d'animer un composant-->
+                <Storyboard x:Key="ParchmentAppear">
+                        <!--TargetName="Parchment" → on anime le Rectangle.-->
+                        <!--TargetProperty="Opacity" → on anime sa transparence.-->
+                        <!--Duration="0:0:1" → l'animation dure 1 seconde.-->
+                        <DoubleAnimation
+                                Storyboard.TargetName="Parchment"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0"
+                                To="0.95"
+                                Duration="0:0:1" />
+
+                </Storyboard>
+
+                <!--effet ombre du Parchemin-->
+                <DropShadowEffect
+                        x:Key="ParchmentShadow"
+                        Color="Black"
+                        BlurRadius="20"
+                        ShadowDepth="5"
+                        Opacity="0.5" />
+
+                <!--GradientStop = une couleur à un endroit précis du dégradé.-->
+                <!--Offset va de 0 à 1 : début → fin.-->
+                <LinearGradientBrush x:Key="ParchmentBrush" StartPoint="0,0" EndPoint="1,0.15">
+                        <GradientStop Color = "#E8D4A0" Offset="0" />
+                        <GradientStop Color= "#F2E4BC" Offset="0.45" />
+                        <GradientStop Color= "#E4CE94" Offset="0.75" />
+                        <GradientStop Color= "#DEC98A" Offset="1" />
+                </LinearGradientBrush>
+
+                <!-- LinearGradientBrush = crée un dégradé progressif entre plusieurs couleurs.
+                     StartPoint et EndPoint définissent la direction du dégradé. -->
+                <LinearGradientBrush x:Key="RollBrush" StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#6E5127" Offset="0" />
+                        <GradientStop Color="#8B6F3E" Offset="0.35" />
+                        <GradientStop Color="#5A4526" Offset="0.7" />
+                        <GradientStop Color="#3D2E18" Offset="1" />
+                </LinearGradientBrush>
+
+                <!--Style => permet de définir plusieurs propriétés communes.-->
+                <!--x:Key="LoginButtonStyle" => le nom que tu donnes à ce style.-->
+                <!--TargetType="Button" => ce style est destiné aux Button.-->
+                <!--Setter => Pour les boutons utilisant ce style, donne telle valeur à telle propriété.
+                    La Value est un font (qui peut être changé)-->
+                <!--BorderThickness Value 0 = Pas de bordure.-->
+                <!-- Background="Transparent" = le fond du bouton devient transparent,
+                     ce qui permet de voir le parchemin derrière. -->
+                <Style x:Key="LoginButtonStyle" TargetType="Button">
+                        <Setter Property="FontFamily" Value="Georgia" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Foreground" Value="#3D2E18" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Padding" Value="10,4" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+
+                        <!--Style.Triggers (Un Trigger permet de dire) Si une propriété est
+                            dans telle situation, alors change telle propriété.
+                            (On va utiliser la souris)-->
+                        <!--Property="IsMouseOver" → on surveille si la souris est dessus.
+                            Value="True" → le Trigger s'active lorsque c'est vrai.
+                            À l'intérieur du Trigger, on peut utiliser un Setter pour modifier une propriété-->
+                        <!--Padding définit l'espace intérieur du bouton, entre son contenu et ses bords.
+                            10 → espace gauche/droite, 4 → espace haut/bas (différent de Margin, qui crée de l'espace
+                            à l'extérieur du bouton)-->
+                        <!--Cursor permet de définir l'apparence du curseur de la souris lorsqu'il passe au-dessus du bouton.
+                            Le curseur devient alors une main.-->
+                        <!--IsPressed indique que le bouton est actuellement enfoncé par la souris.-->
+                        <!--HorizontalAlignment → positionne le bouton lui-même.-->
+                                <!--HorizontalContentAlignment → positionne le texte à l'intérieur du bouton.-->
+                                <!--HorizontalAlignment = position du contrôle-->
+                                <!--HorizontalContentAlignment = position du contenu du contrôle-->
+                                <!--Opacity => Contrôle la transparence d'un élément. 1 = totalement visible, 0 = complètement invisible, 0.5 = moitié transparent-->
+                        <!--BorderThickness, qui contrôle l'épaisseur de la bordure, BorderBrush contrôle sa couleur.-->
+                        <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#8B1A1A" />
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        <Setter Property="Opacity" Value="0.8" />
+                                        <Setter Property="BorderBrush" Value="#8B6F3E" />
+                                </Trigger>
+
+                                
+                                <Trigger Property="IsPressed" Value="True">
+                                        <Setter Property="FontWeight" Value="Bold" />
+                                        </Trigger>
+                        </Style.Triggers>
+                </Style>
+
+        </UserControl.Resources>
+
         <Grid Background="Black">
 
-        <Grid>
+        <Grid Width="600" Height="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" >
 
+            <!--Effect="{StaticResource ParchmentShadow} Utilise DropShadowEffect-->
+            <!-- Effect applique un effet visuel à l'élément.
+                 Ici, StaticResource récupère l'effet ParchmentShadow défini dans les ressources. -->
+            <!--Stroke = donner un effet de bord à la feuille-->
             <!-- La feuille -->
             <Rectangle
-                Fill="#E8D29B"
-                Width="500"
-                Height="300" />
+                x:Name="Parchment"
+                Fill="{StaticResource ParchmentBrush}"
+                Width="600"
+                Height="500"
+                Stroke="#8B6F3E"
+                StrokeThickness="4"
+                Opacity="0"
+                RadiusX="15"
+                RadiusY="15"
+                Effect="{StaticResource ParchmentShadow}" />
 
+        <!-- StackPanel = organise automatiquement les éléments les uns à la suite des autres.
+             Orientation="Vertical" les empile de haut en bas. -->
+        <!--HorizontalAlignment contrôle la position de l'élément dans son parent.-->
+        <!--Foreground définit la couleur du contenu textuel.-->
         <StackPanel
+                x:Name="MenuButtons"
                 Orientation= "Vertical"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Margin= "0,20,0,0" >
+                Width="300"
+                Margin= "0,10,0,0" >
+
+                <TextBlock
+                        Text="MODE SOLO"
+                        FontFamily="Georgia"
+                        FontWeight="Bold"
+                        Foreground="#3D2E18"
+                        HorizontalAlignment="Center"
+                        TextAlignment="Center"
+                        Margin="0,0,0,20"
+                        FontSize="24"/>
 
                 <Button
                 Content="Nouvelle Partie"
-                Width="150"
+                Width="200"
                 Height="50"
-                HorizontalAlignment="Left"
-                Margin="10" />
+                HorizontalAlignment="Center"
+                Style="{StaticResource LoginButtonStyle}"
+                Margin="10"
+                Click="NewGameButton_Click" />
 
         <Button
                 Content="Continuer"
                 Width="150"
                 Height="50"
-                HorizontalAlignment="Left"
-                Margin= "10" />
+                HorizontalAlignment="Center"
+                Style="{StaticResource LoginButtonStyle}"
+                Margin= "10"
+                Click="ContinueButton_Click" />
 
-        <!--(Margin)60 pixel de décalage partant vers le bas (monte)-->
+        <!--Margin = espace extérieur autour du bouton.
+                 Ici : 10 gauche, 10 haut, 10 droite, 40 bas. -->
         <Button
                 
                 Content= "Charger"
                 Width="150"
                 Height="50"
-                HorizontalAlignment="Left"
-                Margin= "0,0,0,60"  />
+                HorizontalAlignment="Center"
+                Style="{StaticResource LoginButtonStyle}"
+                Margin="10,10,10,40"
+                Click="LoadButton_Click" />
 
+        <!-- Click permet d'associer une action au bouton lorsqu'il est cliqué.
+             Le nom indiqué correspond à une méthode dans le fichier .xaml.cs. -->
         <Button
                 Content= "Retour au Menu"
-                Width="150"
+                Width="200"
                 Height="50"
-                HorizontalAlignment="Left"
-                Margin="10" />
+                HorizontalAlignment="Center"
+                Style="{StaticResource LoginButtonStyle}"
+                Margin="10,0,10,10"
+                Click="ReturnButton_Click" />
 
         </StackPanel>
 
-        </Grid>
-
+            <!--Stroke réalise un contour sombre au rouleau du parchemin-->
+            <!--Margin= Déplace le rouleau vers la gauche-->
+            <!--Fill mets la couleur qui est définis dans les ressources (à probablement améliorer)-->
             <!-- Rouleau Gauche -->
-            <Ellipse
-                Fill="#B88A45"
-                Width="40"
-                Height="320"
-                HorizontalAlignment="Center"
+            <Ellipse Panel.ZIndex="1"
+                Fill="{StaticResource RollBrush}"
+                Width="30"
+                Height="500"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Margin="20,0,0,0" /> <!--Déplace le rouleau vers la gauche-->
+                Margin="-10,0,0,0"
+                Stroke="#3D2E18"
+                Effect="{StaticResource ParchmentShadow}"
+                StrokeThickness="2" />
 
+            <!--ZIndex ne déplace rien. Il détermine simplement l'ordre d'affichage lorsque des éléments se chevauchent.-->
+            <!--La valeur de Margin = Déplace le rouleau vers la droite-->
+            <!-- Ellipse = crée une forme ovale ou circulaire.
+                Width et Height permettent de définir sa taille.
+                Ici, elle sert à représenter les rouleaux du parchemin. -->
             <!-- Rouleau Droit -->
-            <Ellipse
-                Fill="#B88A45"
-                Width="40"
-                Height="320"
+            <Ellipse Panel.ZIndex="1"
+                Fill="{StaticResource RollBrush}"
+                Width="30"
+                Height="500"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="0,0,20,0" /> <!--Déplace le rouleau vers la droite-->
+                Margin="0,0,-10,0"
+                Stroke="#3D2E18"
+                Effect="{StaticResource ParchmentShadow}"
+                StrokeThickness="2" />
 
         </Grid>
 
-</Window>
+        </Grid>
+
+</UserControl>

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using GuildManager.UI.The_Menu;
 
-namespace GuildManager;
-
+namespace GuildManager.UI.The_MainWindow;
 public partial class MainWindow : Window
 {
     public MainWindow()

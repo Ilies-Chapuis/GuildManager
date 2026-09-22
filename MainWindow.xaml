@@ -1,11 +1,11 @@
-﻿<Window x:Class="GuildManager.MainWindow"
+﻿<Window x:Class="GuildManager.UI.The_MainWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuildManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="705" Width="1253">
+        Title="Legacy of Tartaros" Height="705" Width="1253">
 
     <Grid>
         <ContentControl x:Name="MainContent" />
