@@ -34,7 +34,7 @@
                             Height="270"
                             Canvas.Left="845"
                             Canvas.Top="210"
-                            Background="Red"
+                            Background="Transparent"
                             Click="Quest2Button_Click" />
 
                         <Button
@@ -42,7 +42,7 @@
                             Height="270"
                             Canvas.Left="637"
                             Canvas.Top="210"
-                            Background="Red"
+                            Background="Transparent"
                             Click="QuestAnnexesButton_Click"/>
 
                         <Button
@@ -50,7 +50,7 @@
                             Height="275"
                             Canvas.Left="427"
                             Canvas.Top="205"
-                            Background="Red"
+                            Background="Transparent"
                             Click="QuestBossButton_Click"/>
                     </Canvas>
                     <Button
