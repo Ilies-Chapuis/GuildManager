@@ -19,6 +19,16 @@
                 <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
 
+            <Style x:Key="Quest2ValidateButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Georgia" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="Background" Value="#D8C08A" />
+                <Setter Property="BorderBrush" Value="#8B6F3E" />
+                <Setter Property="BorderThickness" Value="3" />
+            </Style>
+
+
             <!-- Bouton invisible mais cliquable -->
             
         </UserControl.Resources>
@@ -38,16 +48,18 @@
                         Style="{StaticResource Quest2BackButtonStyle}"
                         Click="ReturnButton_Click"
                         Width="150"
-                        HorizontalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
                         Margin="30" />
 
                     <Canvas>
                         <Button
-                            Width="200"
-                            Height="100"
-                            Canvas.Left="500"
-                            Canvas.Top="200"
-                            Background="Red"
+                            Content="Valider"
+                            Width="150"
+                            Height="70"
+                            Canvas.Left="640"
+                            Canvas.Top="530"
+                            Style="{StaticResource Quest2ValidateButtonStyle}"
                             Click="Quest2Button_Click" />
 
                     </Canvas>      
