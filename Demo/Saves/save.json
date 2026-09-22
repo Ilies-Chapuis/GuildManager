@@ -1,0 +1,37 @@
+{
+  "Day": 1,
+  "RemainingHours": 10,
+  "Gold": 500,
+  "Food": 17,
+  "HealthPotions": 10,
+  "Reputation": 0,
+  "CurrentVoice": "Serious",
+  "SwitchAlreadyTriggered": false,
+  "Roster": [
+    {
+      "Name": "Sameth",
+      "Type": "Sameth",
+      "Level": 1,
+      "Experience": 0,
+      "HealthPoints": 30,
+      "UniqueEventTriggered": false
+    },
+    {
+      "Name": "Meloap",
+      "Type": "Meloap",
+      "Level": 1,
+      "Experience": 15,
+      "HealthPoints": 50,
+      "UniqueEventTriggered": false
+    },
+    {
+      "Name": "Elowen",
+      "Type": "Elowen",
+      "Level": 1,
+      "Experience": 0,
+      "HealthPoints": 32,
+      "UniqueEventTriggered": false
+    }
+  ],
+  "UsedRecruitNames": []
+}
