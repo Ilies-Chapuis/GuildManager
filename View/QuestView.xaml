@@ -18,6 +18,34 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
+
+            <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+
+                <!--Style utilisé pour les boutons invisibles.
+                Background="Transparent" rend le bouton invisible
+                tout en conservant sa zone cliquable.
+                Le ControlTemplate remplace l'apparence par défaut
+                du bouton WPF afin de supprimer l'effet bleu au survol.
+                Le Border sert de surface visuelle du bouton.
+                TemplateBinding Background permet de récupérer
+                le Background défini sur le bouton.
+                Le ContentPresenter permet d'afficher le contenu
+                du bouton s'il en possède un.-->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </UserControl.Resources>
 
         <Grid Background="#05030A">
@@ -34,7 +62,7 @@
                             Height="270"
                             Canvas.Left="845"
                             Canvas.Top="210"
-                            Background="Transparent"
+                            Style="{StaticResource InvisibleButtonStyle}"
                             Click="Quest2Button_Click" />
 
                         <Button
@@ -42,7 +70,7 @@
                             Height="270"
                             Canvas.Left="637"
                             Canvas.Top="210"
-                            Background="Transparent"
+                            Style="{StaticResource InvisibleButtonStyle}"
                             Click="QuestAnnexesButton_Click"/>
 
                         <Button
@@ -50,7 +78,7 @@
                             Height="275"
                             Canvas.Left="427"
                             Canvas.Top="205"
-                            Background="Transparent"
+                            Style="{StaticResource InvisibleButtonStyle}"
                             Click="QuestBossButton_Click"/>
                     </Canvas>
                     <Button

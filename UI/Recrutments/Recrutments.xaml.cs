@@ -17,4 +17,14 @@ public partial class RecrutementsView : UserControl
         MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
         mainWindow.ChangeMainContent(new GameView());
     }
+
+    private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void NextPageButton_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
 }

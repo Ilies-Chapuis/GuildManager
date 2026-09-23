@@ -37,6 +37,26 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         Margin="30" />
+
+                    <Canvas>
+                        <Button
+                            Width="80"
+                            Height="90"
+                            Canvas.Left="220"
+                            Canvas.Top="560"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="PreviousPageButton_Click" />
+
+                        <Button
+                            Width="80"
+                            Height="90"
+                            Canvas.Left="940"
+                            Canvas.Top="560"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Click="NextPageButton_Click" />
+                    </Canvas>
                 </Grid>
             </Viewbox>
         </Grid>

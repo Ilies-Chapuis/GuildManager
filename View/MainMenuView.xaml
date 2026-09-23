@@ -143,7 +143,9 @@
                     <Button Content="Solo"
                         Style="{StaticResource MenuButtonStyle}"
                         Click="SoloButton_Click" />
-                    <Button Content="Online" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Online"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Click="OnlineButton_Click" />
                     <Button Content="Options" Style="{StaticResource MenuButtonStyle}"/>
                     <!--On définit le Bouton pour quitter le Menu-->
                     <Button Content="Quitter" Style="{StaticResource MenuButtonStyle}" Click="QuitButton_Click"/>
