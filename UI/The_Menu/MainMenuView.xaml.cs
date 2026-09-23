@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GuildManager.UI.Login_Online;
+using GuildManager.UI.Options;
 using GuildManager.UI.The_LoginSolo;
 using GuildManager.UI.The_MainWindow;
 
@@ -38,5 +39,11 @@ public partial class MainMenuView : UserControl
     {
         MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
         mainWindow.ChangeMainContent(new LoginViewOnline());
+    }
+
+    private void OptionButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+        mainWindow.ChangeMainContent(new OptionView());
     }
 }

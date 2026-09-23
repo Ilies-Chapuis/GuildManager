@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GuildManager"
         mc:Ignorable="d">
 
-        <!--
+    <!--
     UserControl.Resources :
     Stocke des ressources réutilisables dans ce UserControl.
 
@@ -25,166 +25,249 @@
     Offset :
     Définit la position de la couleur :
     0 = début, 1 = fin.
--->
+    -->
 
-        <UserControl.Resources>
+    <UserControl.Resources>
 
-                <LinearGradientBrush x:Key="ParchmentBrush" StartPoint="0,0" EndPoint="1,0.15">
-                        <GradientStop Color="#E8D4A0" Offset="0" />
-                        <GradientStop Color="#F2E4BC" Offset="0.45" />
-                        <GradientStop Color="#E4CE94" Offset="0.75" />
-                        <GradientStop Color="#DEC98A" Offset="1" />
-                </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ParchmentBrush" StartPoint="0,0" EndPoint="1,0.15">
+            <GradientStop Color="#E8D4A0" Offset="0" />
+            <GradientStop Color="#F2E4BC" Offset="0.45" />
+            <GradientStop Color="#E4CE94" Offset="0.75" />
+            <GradientStop Color="#DEC98A" Offset="1" />
+        </LinearGradientBrush>
 
-                <LinearGradientBrush x:Key="RollBrush" StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="#6E5127" Offset="0" />
-                        <GradientStop Color="#8B6F3E" Offset="0.35" />
-                        <GradientStop Color="#5A4526" Offset="0.7" />
-                        <GradientStop Color="#3D2E18" Offset="1" />
-                </LinearGradientBrush>
+        <LinearGradientBrush x:Key="RollBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#6E5127" Offset="0" />
+            <GradientStop Color="#8B6F3E" Offset="0.35" />
+            <GradientStop Color="#5A4526" Offset="0.7" />
+            <GradientStop Color="#3D2E18" Offset="1" />
+        </LinearGradientBrush>
 
-                <!--Storyboard : Contient les animations du parchemin.
-                ScaleX : Permet d'ouvrir le parchemin horizontalement.-->
+        <!--
+        Storyboard :
+        Contient les animations du parchemin.
 
-                <Storyboard x:Key="UnrollStoryboard">
+        ScaleX :
+        Permet d'ouvrir le parchemin horizontalement.
+        -->
 
-                        <!--DoubleAnimation : Anime une valeur numérique.
-                            From : Valeur de départ.
-                            To :  Valeur d'arrivée.
-                            Duration : Durée de l'animation.
-                            QuadraticEase : Rend l'animation plus naturelle en accélérant
-                            puis en ralentissant progressivement.
-                            EaseOut : L'animation ralentit progressivement à la fin.
-                            Ici, ScaleX passe de 0 à 1 pour ouvrir le parchemin horizontalement. -->
-                        <DoubleAnimation
-                                Storyboard.TargetName="ParchmentScale"
-                                Storyboard.TargetProperty="ScaleX"
-                                From="0"
-                                To="1"
-                                Duration="0:0:01.3">
+        <Storyboard x:Key="UnrollStoryboard">
 
-                                <DoubleAnimation.EasingFunction>
-                                        <QuadraticEase EasingMode="EaseOut"/>
-                                </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                </Storyboard>
-                
-        </UserControl.Resources>
+            <!--
+            DoubleAnimation :
+            Anime une valeur numérique.
 
-        <!--UserControl.Triggers : Déclenche une action lorsqu'un événement se produit.
-            Loaded : Se déclenche quand le UserControl est chargé.
-            BeginStoryboard : Lance une animation. -->
+            From :
+            Valeur de départ.
 
-        <Grid Background="#05030A">
+            To :
+            Valeur d'arrivée.
 
-                <Grid.Triggers>
+            Duration :
+            Durée de l'animation.
 
-                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                <BeginStoryboard Storyboard="{StaticResource UnrollStoryboard}" />
-                        </EventTrigger>
+            QuadraticEase :
+            Rend l'animation plus naturelle.
 
-                </Grid.Triggers>
-                
-                <Viewbox Stretch="Uniform">
+            EaseOut :
+            L'animation ralentit progressivement à la fin.
+            -->
 
-                        <Grid Width="1253" Height="705">
+            <DoubleAnimation
+                Storyboard.TargetName="ParchmentScale"
+                Storyboard.TargetProperty="ScaleX"
+                From="0"
+                To="1"
+                Duration="0:0:1.3">
 
-                                <Image
-                                        Source="/GuildManager;component/Assets/Ruines.png"
-                                        Stretch="Fill"
-                                        Width="1253"
-                                        Height="705" />
-                                <Border
-                                        Width="850"
-                                        Height="300"
-                                        Background="{StaticResource ParchmentBrush}"
-                                        BorderBrush="#8B6F3E"
-                                        BorderThickness="4"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        RenderTransformOrigin="0.5,0.5" >
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
 
+            </DoubleAnimation>
 
-                                        <!--RenderTransform : Modifie visuellement le Border sans changer
-                                            sa position dans la mise en page.
-                                            ScaleTransform : Permet d'agrandir ou réduire le Border.
-                                            ScaleX : Change sa largeur.
-                                            ScaleY : Change sa hauteur.
-                                            Ici, ScaleX = 0 signifie que le parchemin commence fermé horizontalement.-->
-                                        <Border.RenderTransform>
-                                                <ScaleTransform
-                                                        x:Name="ParchmentScale"
-                                                        ScaleX="0"
-                                                        ScaleY="1" />
-                                        </Border.RenderTransform>
-                                        <Grid Margin="0,-40,0,0">
-                                                <TextBlock
-                                                        Text="CONNEXION EN LIGNE"
-                                                        FontFamily="Georgia"
-                                                        FontSize="28"
-                                                        FontWeight="Bold"
-                                                        Foreground="#3D2E18"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Top"
-                                                        Margin="0,50,0,0" />
+        </Storyboard>
 
-                                                <StackPanel
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Top"
-                                                        Margin="0,100,0,0">
+    </UserControl.Resources>
 
-                                                        <TextBlock
-                                                                Text="Pseudo"
-                                                                FontFamily="Georgia"
-                                                                FontSize="20"
-                                                                Foreground="#3D2E18"
-                                                                HorizontalAlignment="Center"
-                                                                Margin="0,0,0,5" />
+    <!--
+    Grid.Triggers :
+    Déclenche une action lorsqu'un événement se produit.
 
-                                                                <TextBox
-                                                                        x:Name="PseudoTextBox"
-                                                                        Width="300"
-                                                                        Height="35"
-                                                                        FontFamily="Georgia"
-                                                                        FontSize="18"
-                                                                        Padding="8,2"
-                                                                        HorizontalContentAlignment="Center"
-                                                                        VerticalContentAlignment="Center" />
+    Loaded :
+    Se déclenche quand le UserControl est chargé.
 
-                                                                <TextBlock
-                                                                        Text="Mot de passe"
-                                                                        FontFamily="Georgia"
-                                                                        FontSize="20"
-                                                                        Foreground="#3D2E18"
-                                                                        HorizontalAlignment="Center"
-                                                                        Margin="0,20,0,5" />
+    BeginStoryboard :
+    Lance une animation.
+    -->
 
-                                                                        <PasswordBox
-                                                                                x:Name="PasswordBox"
-                                                                                Width="300"
-                                                                                Height="35"
-                                                                                FontFamily="Georgia"
-                                                                                FontSize="18"
-                                                                                Padding="8,2"
-                                                                                HorizontalContentAlignment="Center"
-                                                                                VerticalContentAlignment="Center" />
+    <Grid Background="#05030A">
 
-                                                                        <Button
-                                                                                Content="Se connecter"
-                                                                                Width="180"
-                                                                                Height="45"
-                                                                                FontFamily="Georgia"
-                                                                                FontSize="20"
-                                                                                Foreground="#3D2E18"
-                                                                                Background="#D8C08A"
-                                                                                BorderBrush="#8B6F3E"
-                                                                                BorderThickness="2"
-                                                                                Margin="0,25,0,0"
-                                                                                Click="LoginButton_Click" />
-                                                </StackPanel>
-                                        </Grid>
-                                </Border>
-                        </Grid>
-                </Viewbox>
-        </Grid>
+        <Grid.Triggers>
+
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource UnrollStoryboard}" />
+            </EventTrigger>
+
+        </Grid.Triggers>
+
+        <Viewbox Stretch="Uniform">
+
+            <Grid Width="1253" Height="705">
+
+                <Image
+                    Source="/GuildManager;component/Assets/Ruines.png"
+                    Stretch="Fill"
+                    Width="1253"
+                    Height="705" />
+
+                <Border
+                    Width="850"
+                    Height="300"
+                    Background="{StaticResource ParchmentBrush}"
+                    BorderBrush="#8B6F3E"
+                    BorderThickness="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    RenderTransformOrigin="0.5,0.5">
+
+                    <!--
+                    RenderTransform :
+                    Modifie visuellement le Border.
+
+                    ScaleTransform :
+                    Permet de modifier sa taille.
+
+                    ScaleX :
+                    Change sa largeur.
+
+                    ScaleY :
+                    Change sa hauteur.
+                    -->
+
+                    <Border.RenderTransform>
+
+                        <ScaleTransform
+                            x:Name="ParchmentScale"
+                            ScaleX="0"
+                            ScaleY="1" />
+
+                    </Border.RenderTransform>
+
+                    <Grid Margin="0,-40,0,0">
+
+                        <TextBlock
+                            Text="CONNEXION EN LIGNE"
+                            FontFamily="Georgia"
+                            FontSize="28"
+                            FontWeight="Bold"
+                            Foreground="#3D2E18"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,50,0,0" />
+
+                        <StackPanel
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="0,100,0,0">
+
+                            <TextBlock
+                                Text="Pseudo"
+                                FontFamily="Georgia"
+                                FontSize="20"
+                                Foreground="#3D2E18"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,5" />
+
+                            <TextBox
+                                x:Name="PseudoTextBox"
+                                Width="300"
+                                Height="35"
+                                FontFamily="Georgia"
+                                FontSize="18"
+                                Padding="8,2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" />
+
+                            <TextBlock
+                                Text="Mot de passe"
+                                FontFamily="Georgia"
+                                FontSize="20"
+                                Foreground="#3D2E18"
+                                HorizontalAlignment="Center"
+                                Margin="0,20,0,5" />
+
+                            <PasswordBox
+                                x:Name="PasswordBox"
+                                Width="300"
+                                Height="35"
+                                FontFamily="Georgia"
+                                FontSize="18"
+                                Padding="8,2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center" />
+
+                            <!--
+                            Les trois boutons sont regroupés
+                            horizontalement sur une seule ligne.
+                            -->
+
+                            <StackPanel
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,25,0,0">
+
+                                <Button
+                                    Content="Retour"
+                                    Width="150"
+                                    Height="45"
+                                    FontFamily="Georgia"
+                                    FontSize="20"
+                                    Foreground="#3D2E18"
+                                    Background="#D8C08A"
+                                    BorderBrush="#8B6F3E"
+                                    BorderThickness="2"
+                                    Margin="0,0,10,0"
+                                    Click="ReturnButton_Click" />
+
+                                <Button
+                                    Content="Se connecter"
+                                    Width="180"
+                                    Height="45"
+                                    FontFamily="Georgia"
+                                    FontSize="20"
+                                    Foreground="#3D2E18"
+                                    Background="#D8C08A"
+                                    BorderBrush="#8B6F3E"
+                                    BorderThickness="2"
+                                    Margin="10,0,10,0"
+                                    Click="LoginButton_Click" />
+
+                                <Button
+                                    Content="S'inscrire"
+                                    Width="180"
+                                    Height="45"
+                                    FontFamily="Georgia"
+                                    FontSize="20"
+                                    Foreground="#3D2E18"
+                                    Background="#D8C08A"
+                                    BorderBrush="#8B6F3E"
+                                    BorderThickness="2"
+                                    Margin="10,0,0,0"
+                                    Click="RegisterButton_Click" />
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+        </Viewbox>
+
+    </Grid>
+
 </UserControl>

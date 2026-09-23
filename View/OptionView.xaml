@@ -3,7 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GuildManager">
+        mc:Ignorable="d">
 
-        
+    <Grid Background="#05030A">
+
+        <Viewbox Stretch="Uniform">
+
+            <Grid Width="1253" Height="705">
+
+                <Image
+                    Source="/GuildManager;component/Assets/Options.png"
+                    Stretch="Fill"
+                    Width="1253"
+                    Height="705" />
+
+                <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom">
+
+                        <Button
+                                Content="Retour Au Jeu"
+                                Width="250"
+                                Height="60"
+                                FontFamily="Georgia"
+                                FontSize="22"
+                                Foreground="#3D2E18"
+                                Background="#D8C08A"
+                                BorderBrush="#8B6F3E"
+                                BorderThickness="3"
+                                Margin="0,0,20,40"
+                                Click="ReturnButton_Click" />
+
+                        <Button
+                                Content="Retour Au Menu Principale"
+                                Width="290"
+                                Height="60"
+                                FontFamily="Georgia"
+                                FontSize="22"
+                                Foreground="#3D2E18"
+                                Background="#D8C08A"
+                                BorderBrush="#8B6F3E"
+                                BorderThickness="3"
+                                Margin="0,0,20,40"
+                                Click="MainMenuButton_Click"/>
+                </StackPanel>
+
+            </Grid>
+
+        </Viewbox>
+
+    </Grid>
+
 </UserControl>

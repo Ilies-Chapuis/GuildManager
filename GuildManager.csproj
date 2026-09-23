@@ -16,6 +16,7 @@
     <Resource Include="Assets\Recrutements.png" />
     <Resource Include="Assets\Menu_quêtes2.png" />
     <Resource Include="Assets\Ruines.png" />
+    <Resource Include="Assets\Options.png" />
   </ItemGroup>
 
 </Project>

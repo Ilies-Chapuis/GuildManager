@@ -146,7 +146,9 @@
                     <Button Content="Online"
                             Style="{StaticResource MenuButtonStyle}"
                             Click="OnlineButton_Click" />
-                    <Button Content="Options" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Content="Options"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Click="OptionButton_Click" />
                     <!--On définit le Bouton pour quitter le Menu-->
                     <Button Content="Quitter" Style="{StaticResource MenuButtonStyle}" Click="QuitButton_Click"/>
                 </StackPanel>
