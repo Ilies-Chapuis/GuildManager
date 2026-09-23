@@ -2,11 +2,7 @@ using System;
 
 namespace GuildManager.Logic.Gameplay;
 
-// Day/hour cycle for the guild (GDD 6.5 and section 2): a day is a shared
-// 16-hour budget. Resolving a quest consumes hours; once the budget runs
-// out, the day ends and play moves on to the next one.
-// FR : Cycle jour/heures de la guilde : un budget partagé de 16h. Résoudre
-// une quête consomme des heures ; une fois le budget épuisé, on change de jour.
+// Day/hour cycle for the guild 
 public sealed class DayCycle
 {
     public const int HoursPerDay = 16;

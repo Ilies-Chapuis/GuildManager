@@ -17,16 +17,21 @@ public abstract class Adventurer
     public int Experience { get; private set; }
 
     // True once this recruit has already been sent on a quest today. A
-    // recruit used in one quest cannot be reused in another the same day -
-    // the team must change, or new recruits must be hired (per design).
+    // recruit used in one quest cannot be reused in another the same day.
     // FR : Vrai une fois cette recrue déjà envoyée en quête aujourd'hui.
-    // Une même recrue ne peut pas faire deux quêtes le même jour.
     public bool UsedToday { get; private set; }
 
+    // True after coming back injured from a failed quest whose estimated
+    // success rate was 30% or higher (below that, the team dies instead -
+    // see Guild.AttemptQuest). An injured recruit takes a 15-point malus on
+    // CalculateSuccessRate until healed with a potion (see Heal()).
+    // FR : Vrai après un retour blessé d'une quête ratée dont le taux
+    // estimé était ≥ 30%. Applique un malus de 15 points tant que la
+    // recrue n'est pas soignée par une potion.
+    public bool IsInjured { get; private set; }
+
     // Base success rate: 35-45% for generic recruits, 80-85% for special
-    // adventurers. It never changes with level - only the level-parity
-    // bonus below reflects progression. The Healer overrides this
-    // mechanism entirely: it has no success rate of its own (see Healer.cs).
+    // adventurers. The Healer overrides this mechanism entirely (see Healer.cs).
     // FR : Taux de réussite de base : 35-45% pour une recrue générique,
     // 80-85% pour un personnage spécial. Le Healeur n'a pas de taux propre.
     protected int BaseSuccessRate { get; set; } = 40;
@@ -38,12 +43,15 @@ public abstract class Adventurer
         MaxHealthPoints = healthPoints;
     }
 
-    // Restores HP to the recruit (e.g. a health potion), capped at MaxHealthPoints.
-    // FR : Restaure des PV à la recrue (ex : potion de vie), plafonné au maximum.
+    // Restores HP to the recruit (e.g. a health potion), capped at
+    // MaxHealthPoints, and cures the injured status if any.
+    // FR : Restaure des PV (ex : potion de vie), plafonné au maximum, et
+    // guérit le statut "blessé" le cas échéant.
     public void Heal(int amount)
     {
         if (amount <= 0) return;
         HealthPoints = Math.Min(HealthPoints + amount, MaxHealthPoints);
+        IsInjured = false;
     }
 
     // Deals damage to the recruit (e.g. a failed quest), floored at 0.
@@ -53,6 +61,10 @@ public abstract class Adventurer
         if (amount <= 0) return;
         HealthPoints = Math.Max(HealthPoints - amount, 0);
     }
+
+    // Marks the recruit as injured after coming back from a failed quest.
+    // FR : Marque la recrue comme blessée après un retour de quête ratée.
+    public void MarkInjured() => IsInjured = true;
 
     // Grants experience and levels the recruit up as thresholds are crossed.
     // FR : Octroie de l'expérience et fait monter de niveau la recrue au fil des paliers.
@@ -71,19 +83,19 @@ public abstract class Adventurer
         }
     }
 
-    // Success rate for a quest of a given level (1-5, rising every two days,
-    // see TerminalGameLoop.GetQuestLevelForDay). When the recruit's own
-    // Level matches the quest's level exactly, the base rate is multiplied
-    // by 1.5 - encouraging the player to match recruits to fitting quests
-    // as they level up, rather than always chasing the hardest quest.
-    // FR : Taux de réussite pour une quête de niveau donné. Quand le niveau
-    // de la recrue correspond exactement à celui de la quête, le taux de
-    // base est multiplié par 1.5.
+    // Success rate for a quest of a given level (1-5). Level-parity bonus
+    // (x1.5) as before; an injured recruit additionally takes a flat -15
+    // point malus until healed.
+    // FR : Taux de réussite pour une quête de niveau donné. Une recrue
+    // blessée subit en plus un malus fixe de -15 points jusqu'à guérison.
     public virtual int CalculateSuccessRate(int questLevel)
     {
         double rate = BaseSuccessRate;
         if (Level == questLevel)
             rate *= 1.5;
+
+        if (IsInjured)
+            rate -= 15;
 
         return (int)Math.Clamp(Math.Round(rate), 5, 95);
     }
@@ -97,13 +109,8 @@ public abstract class Adventurer
         HealthPoints = healthPoints;
     }
 
-    // Marks this recruit as having gone on a quest today.
-    // FR : Marque cette recrue comme déjà envoyée en quête aujourd'hui.
     public void MarkUsedToday() => UsedToday = true;
 
-    // Clears the daily usage flag; called by Guild.ResetDailyUsage() at the
-    // start of a new day.
-    // FR : Réinitialise l'indicateur d'utilisation quotidienne, en début de journée.
     public void ResetDailyUsage() => UsedToday = false;
 
     public override string ToString() => $"{Name} (Lvl. {Level}, {HealthPoints} HP)";

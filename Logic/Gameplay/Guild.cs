@@ -16,6 +16,12 @@ public sealed class Guild
 {
     public const int HpRestoredPerPotion = 10;
 
+    // Below this estimated success rate, a failed quest kills the whole
+    // team instead of merely injuring it.
+    // FR : En dessous de ce taux de réussite estimé, une quête ratée tue
+    // toute l'équipe au lieu de simplement la blesser.
+    public const int DeathThreshold = 30;
+
     public List<Adventurer> Roster { get; } = new();
     public GuildResources Resources { get; } = new();
     public DayCycle Cycle { get; } = new();
@@ -45,14 +51,17 @@ public sealed class Guild
     }
 
     // Assigns a group of recruits to a quest and resolves it if the team
-    // meets the quest's requirements (size, categories), eligibility, the
-    // once-per-day usage rule (no recruit can do two quests the same day -
-    // the team must change, or new recruits must be hired), and the day's
-    // hour budget (GDD 6.5).
-    // FR : Assigne un groupe de recrues à une quête et la résout si l'équipe
-    // respecte les exigences, l'éligibilité, la règle "une quête par jour"
-    // (aucune recrue ne peut faire deux quêtes le même jour), et le budget
-    // d'heures du jour.
+    // meets the quest's requirements, eligibility, the once-per-day usage
+    // rule, and the day's hour budget (GDD 6.5). On failure, the outcome
+    // depends on the estimated success rate that was actually sent: below
+    // DeathThreshold, the whole team dies (removed from the roster);
+    // otherwise the team survives but returns injured (a 15-point malus
+    // applies to each of them until healed with a potion).
+    // FR : Assigne un groupe de recrues à une quête. En cas d'échec, le
+    // taux de réussite estimé au moment de l'envoi détermine la
+    // conséquence : sous DeathThreshold, toute l'équipe meurt (retirée du
+    // roster) ; sinon elle revient blessée (malus de 15 points par recrue
+    // jusqu'à guérison par potion).
     public bool AttemptQuest(Quest quest, IReadOnlyList<Adventurer> assignedRecruits)
     {
         if (!quest.MeetsTeamRequirements(assignedRecruits))
@@ -67,12 +76,44 @@ public sealed class Guild
         if (!Cycle.ConsumeHours(quest.DurationHours))
             return false; // not enough hours left today
 
+        int estimatedRate = QuestResolver.PreviewSuccessRate(quest, assignedRecruits, Resources.Food);
         bool wasSuccessful = QuestResolver.Resolve(quest, assignedRecruits, Resources.Food);
-        if (wasSuccessful)
-            Resources.AddGold(quest.GoldReward);
 
-        foreach (var recruit in assignedRecruits)
-            recruit.MarkUsedToday();
+        if (wasSuccessful)
+        {
+            Resources.AddGold(quest.GoldReward);
+            foreach (var recruit in assignedRecruits)
+                recruit.MarkUsedToday();
+        }
+        else if (estimatedRate < DeathThreshold)
+        {
+            // The team dies - except special adventurers, who are immune
+            // to death and merely come back injured instead.
+            // FR : L'équipe meurt - sauf les personnages spéciaux, qui sont
+            // insensibles à la mort et reviennent seulement blessés.
+            foreach (var recruit in assignedRecruits)
+            {
+                if (recruit is SpecialAdventurer)
+                {
+                    recruit.MarkInjured();
+                    recruit.MarkUsedToday();
+                }
+                else
+                {
+                    Roster.Remove(recruit);
+                }
+            }
+        }
+        else
+        {
+            // The team survives but comes back injured.
+            // FR : L'équipe survit mais revient blessée.
+            foreach (var recruit in assignedRecruits)
+            {
+                recruit.MarkInjured();
+                recruit.MarkUsedToday();
+            }
+        }
 
         return wasSuccessful;
     }
@@ -81,8 +122,10 @@ public sealed class Guild
     // FR : Surcharge pratique pour assigner une seule recrue à une quête.
     public bool AttemptQuest(Quest quest, Adventurer recruit) => AttemptQuest(quest, new[] { recruit });
 
-    // Consumes a health potion to heal a recruit by 10 HP; fails if stock is empty.
-    // FR : Consomme une potion de vie pour soigner une recrue de 10 PV ; échoue si le stock est vide.
+    // Consumes a health potion to heal a recruit by 10 HP (and cure the
+    // injured status); fails if the potion stock is empty.
+    // FR : Consomme une potion de vie pour soigner une recrue de 10 PV
+    // (et guérir le statut blessé) ; échoue si le stock est vide.
     public bool UseHealthPotion(Adventurer recruit)
     {
         if (!Resources.ConsumeHealthPotion())

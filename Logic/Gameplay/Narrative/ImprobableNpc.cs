@@ -24,7 +24,7 @@ public sealed class ImprobableNpc
     // Predefined improbable NPC: the Black Market Donkey.
     // FR : PNJ improbable prédéfini : l'Âne du marché noir.
     public static ImprobableNpc BlackMarketDonkey => new(
-        name: "The Black Market Donkey",
+        name: "Ane du marché noir",
         appearance: "A bipedal donkey in a worn trench coat, briefcase in hand, cracked monocle.",
         questHook: "Offers to trade resources for a favor that is nobody else's business.",
         questDurationHours: 3);
