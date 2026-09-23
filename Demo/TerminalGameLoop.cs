@@ -1,6 +1,5 @@
 
-// TMP - TEMPORARY 
-
+// TMP - TEMPORARY terminal
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,40 +17,11 @@ public static class TerminalGameLoop
     // FR : TMP — coût de recrutement fixe et taux d'échange, en attendant un vrai équilibrage.
     private const int HireCost = 50;
     private const int GoldPerFoodUnit = 5;
+    private const int GoldPerHealthPotion = 15;
     private const string SavePath = "Saves/save.json";
 
-    // Quest level for a given day: level 1 on days 1-3, then +1 every two
-    // days, reaching level 5 on day 10 (as requested).
-    // FR : Niveau de quête pour un jour donné : niveau 1 les jours 1 à 3,
-    // puis +1 tous les 2 jours, jusqu'au niveau 5 au jour 10.
-    private static int GetQuestLevelForDay(int day)
-    {
-        if (day <= 3) return 1;
-        return 1 + (int)Math.Ceiling((day - 3) / 2.0);
-    }
-
-    // TMP: quick and dirty quest generation. Escort requires a Warrior,
-    // Exorcism requires a Healer. Difficulty is now the quest's level
-    // (1-5), matching Adventurer.Level's own scale.
-    // A real QuestGenerator (still "en cours" on the Trello) will replace this.
-    // FR : TMP — génération de quêtes minimale. La difficulté est
-    // maintenant le niveau de la quête (1-5), sur la même échelle que le
-    // niveau des recrues.
-    private static List<Quest> GenerateQuestsForDay(int day)
-    {
-        int level = GetQuestLevelForDay(day);
-        return new List<Quest>
-        {
-            new($"Escorte (jour {day})", QuestType.Escort,
-                difficulty: level, durationHours: 4, goldReward: 80 + day * 10,
-                requiredClassName: "Warrior"),
-            new($"Exorcisme (jour {day})", QuestType.Exorcism,
-                difficulty: level, durationHours: 6, goldReward: 120 + day * 15,
-                requiredClassName: "Healer"),
-            new($"Exploration de donjon (jour {day})", QuestType.DungeonExploration,
-                difficulty: level, durationHours: 8, goldReward: 150 + day * 20),
-        };
-    }
+    // Quest generation and quest level now live in Logic/Gameplay/Quests/QuestGenerator.cs
+    // FR : La génération de quêtes et son niveau vivent maintenant dans QuestGenerator.cs
 
     // TMP: one improbable NPC offered per day, for the first 3 days, until
     // one is accepted.
@@ -115,7 +85,8 @@ public static class TerminalGameLoop
         for (int i = 0; i < guild.Roster.Count; i++)
         {
             string usedTag = guild.Roster[i].UsedToday ? " (déjà en quête aujourd'hui)" : "";
-            Console.WriteLine($"  {i}: {guild.Roster[i]} [{DescribeType(guild.Roster[i])}]{usedTag}");
+            string injuredTag = guild.Roster[i].IsInjured ? " (blessé, malus 15%)" : "";
+            Console.WriteLine($"  {i}: {guild.Roster[i]} [{DescribeType(guild.Roster[i])}]{usedTag}{injuredTag}");
         }
 
         string? input = Console.ReadLine();
@@ -159,9 +130,28 @@ public static class TerminalGameLoop
 
         bool success = guild.AttemptQuest(quest, chosen);
         questLog.Add((day, quest, success));
-        Console.WriteLine(success
-            ? $"-> {quest.Name} RÉUSSIE. +{quest.GoldReward} or."
-            : "-> Quête ÉCHOUÉE (ou conditions/heures non respectées).");
+
+        if (success)
+        {
+            Console.WriteLine($"-> {quest.Name} RÉUSSIE. +{quest.GoldReward} or.");
+        }
+        else if (previewRate < Guild.DeathThreshold)
+        {
+            var dead = chosen.Where(r => !guild.Roster.Contains(r)).Select(r => r.Name).ToList();
+            var survivors = chosen.Where(r => guild.Roster.Contains(r)).Select(r => r.Name).ToList();
+
+            Console.WriteLine($"-> {quest.Name} ÉCHOUÉE. Le taux estimé ({previewRate}%) était sous les {Guild.DeathThreshold}%.");
+            if (dead.Count > 0)
+                Console.WriteLine($"   {string.Join(", ", dead)} ne reviennent pas de cette quête.");
+            if (survivors.Count > 0)
+                Console.WriteLine($"   {string.Join(", ", survivors)} (personnage spécial, insensible à la mort) reviennent blessés.");
+        }
+        else
+        {
+            string names = string.Join(", ", chosen.Select(r => r.Name));
+            Console.WriteLine($"-> {quest.Name} ÉCHOUÉE. L'équipe revient blessée ({names}) - " +
+                               "soignez-la avec une potion (option 7) ou elle gardera un malus de 15% à sa prochaine quête.");
+        }
     }
 
     // Creates a fresh Guild with the starting roster (new game).
@@ -180,7 +170,7 @@ public static class TerminalGameLoop
 
     public static void Run()
     {
-        Console.WriteLine("=== GUILD MANAGER - TMP terminal loop (build: solo-food-and-load-v7) ===\n");
+        Console.WriteLine("=== GUILD MANAGER - TMP terminal loop (build: no-shop-class-v11) ===\n");
         Console.WriteLine("1: Start a new game");
         Console.WriteLine("2: Load saved game");
         Console.Write("> ");
@@ -218,7 +208,7 @@ public static class TerminalGameLoop
         while (!guild.Cycle.IsGameOver)
         {
             int day = guild.Cycle.CurrentDay;
-            int questLevel = GetQuestLevelForDay(day);
+            int questLevel = QuestGenerator.GetQuestLevelForDay(day);
             Console.WriteLine($"\n----- Jour {day} / 10 (niveau de quête : {questLevel}) -----");
             Console.WriteLine($"Or : {guild.Resources.Gold} | Nourriture : {guild.Resources.Food} | " +
                                $"Potions : {guild.Resources.HealthPotions} | Voix : {guild.Narration.CurrentVoice}");
@@ -249,7 +239,7 @@ public static class TerminalGameLoop
 
             // --- Planning phase menu: repeat actions until the player ends the day ---
             // FR : Menu de planification : actions répétables jusqu'à ce que le joueur termine la journée.
-            var todaysQuests = GenerateQuestsForDay(day);
+            var todaysQuests = QuestGenerator.GenerateForDay(day);
             bool dayEnded = false;
 
             while (!dayEnded)
@@ -257,11 +247,12 @@ public static class TerminalGameLoop
                 Console.WriteLine("\nPhase de planification - choisissez une action :");
                 Console.WriteLine("  1 : Voir les quêtes disponibles et en choisir une");
                 Console.WriteLine("  2 : Recruter un nouvel aventurier");
-                Console.WriteLine("  3 : Échanger de l'or contre de la nourriture");
+                Console.WriteLine("  3 : Boutique (nourriture / potions de soin)");
                 Console.WriteLine("  4 : Voir le roster");
                 Console.WriteLine("  5 : Voir le journal des quêtes (cette partie)");
                 Console.WriteLine("  6 : Sauvegarder la partie");
-                Console.WriteLine("  7 : Terminer la journée (passer à la résolution)");
+                Console.WriteLine("  7 : Soigner une recrue avec une potion");
+                Console.WriteLine("  8 : Terminer la journée (passer à la résolution)");
                 Console.Write("> ");
 
                 switch (Console.ReadLine()?.Trim())
@@ -315,24 +306,57 @@ public static class TerminalGameLoop
                         break;
 
                     case "3":
-                        Console.Write($"Combien de nourriture acheter (taux : {GoldPerFoodUnit} or par unité, vous avez {guild.Resources.Gold} or) ? ");
-                        string? foodInput = Console.ReadLine();
-                        if (int.TryParse(foodInput, out int foodAmount) && foodAmount > 0)
+                        Console.WriteLine("\nBoutique de Sameth :");
+                        Console.WriteLine($"  1: Nourriture ({GoldPerFoodUnit} or/unité)");
+                        Console.WriteLine($"  2: Potions de soin ({GoldPerHealthPotion} or/unité)");
+                        Console.Write($"> (vous avez {guild.Resources.Gold} or) ");
+                        string? shopChoice = Console.ReadLine();
+
+                        if (shopChoice?.Trim() == "1")
                         {
-                            int cost = foodAmount * GoldPerFoodUnit;
-                            if (guild.Resources.SpendGold(cost))
+                            Console.Write("Combien de nourriture acheter ? ");
+                            if (int.TryParse(Console.ReadLine(), out int foodAmount) && foodAmount > 0)
                             {
-                                guild.Resources.AddFood(foodAmount);
-                                Console.WriteLine($"{foodAmount} nourriture achetée pour {cost} or.");
+                                int cost = foodAmount * GoldPerFoodUnit;
+                                if (guild.Resources.SpendGold(cost))
+                                {
+                                    guild.Resources.AddFood(foodAmount);
+                                    Console.WriteLine($"{foodAmount} nourriture achetée pour {cost} or.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Pas assez d'or (besoin de {cost}, disponible {guild.Resources.Gold}).");
+                                }
                             }
                             else
                             {
-                                Console.WriteLine($"Pas assez d'or pour cet achat (besoin de {cost}, disponible {guild.Resources.Gold}).");
+                                Console.WriteLine("Montant invalide - rien n'a été acheté.");
+                            }
+                        }
+                        else if (shopChoice?.Trim() == "2")
+                        {
+                            Console.Write("Combien de potions de soin acheter ? ");
+                            if (int.TryParse(Console.ReadLine(), out int potionAmount) && potionAmount > 0)
+                            {
+                                int cost = potionAmount * GoldPerHealthPotion;
+                                if (guild.Resources.SpendGold(cost))
+                                {
+                                    guild.Resources.AddHealthPotions(potionAmount);
+                                    Console.WriteLine($"{potionAmount} potion(s) de soin achetée(s) pour {cost} or.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Pas assez d'or (besoin de {cost}, disponible {guild.Resources.Gold}).");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Montant invalide - rien n'a été acheté.");
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Montant invalide - rien n'a été acheté.");
+                            Console.WriteLine("Choix non reconnu - rien n'a été acheté.");
                         }
                         break;
 
@@ -341,7 +365,8 @@ public static class TerminalGameLoop
                         foreach (var recruit in guild.Roster)
                         {
                             string usedTag = recruit.UsedToday ? " (déjà en quête aujourd'hui)" : "";
-                            Console.WriteLine($"  {recruit} [{DescribeType(recruit)}]{usedTag}");
+                            string injuredTag = recruit.IsInjured ? " (blessé, malus 15%)" : "";
+                            Console.WriteLine($"  {recruit} [{DescribeType(recruit)}]{usedTag}{injuredTag}");
                         }
                         break;
 
@@ -359,6 +384,38 @@ public static class TerminalGameLoop
                         break;
 
                     case "7":
+                        var injuredOrHealable = guild.Roster.Where(r => r.IsInjured).ToList();
+                        if (injuredOrHealable.Count == 0)
+                        {
+                            Console.WriteLine("Personne n'est blessé pour l'instant.");
+                            break;
+                        }
+
+                        Console.WriteLine($"\nPotions en stock : {guild.Resources.HealthPotions}");
+                        Console.WriteLine("Recrues blessées :");
+                        for (int i = 0; i < injuredOrHealable.Count; i++)
+                            Console.WriteLine($"  {i}: {injuredOrHealable[i]} [{DescribeType(injuredOrHealable[i])}]");
+
+                        Console.Write("Numéro de la recrue à soigner, ou Entrée pour annuler : ");
+                        string? healChoice = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(healChoice))
+                            break;
+
+                        if (int.TryParse(healChoice.Trim(), out int healIndex) &&
+                            healIndex >= 0 && healIndex < injuredOrHealable.Count)
+                        {
+                            bool healed = guild.UseHealthPotion(injuredOrHealable[healIndex]);
+                            Console.WriteLine(healed
+                                ? $"{injuredOrHealable[healIndex].Name} est soigné(e) - malus levé."
+                                : "Plus aucune potion en stock.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Numéro invalide.");
+                        }
+                        break;
+
+                    case "8":
                         dayEnded = true;
                         break;
 
