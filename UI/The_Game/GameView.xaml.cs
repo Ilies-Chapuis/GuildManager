@@ -4,6 +4,7 @@ using GuildManager.UI.Inventory;
 using GuildManager.UI.Quest;
 using GuildManager.UI.Recrutments;
 using GuildManager.UI.Options;
+using GuildManager.UI.GuildMembers;
 using GuildManager.UI.The_MainWindow;
 
 namespace GuildManager.UI.The_Game;
@@ -42,6 +43,7 @@ public partial class GameView : UserControl
 
     private void MembresGuildeButton_Click(object sender, RoutedEventArgs e)
     {
-        
+        MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+        mainWindow.ChangeMainContent(new GuildMembersView());
     }
 }

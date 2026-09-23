@@ -3,11 +3,11 @@ using System.Windows.Controls;
 using GuildManager.UI.The_Game;
 using GuildManager.UI.The_MainWindow;
 
-namespace GuildManager.UI.Recrutments;
+namespace GuildManager.UI.GuildMembers;
 
-public partial class RecrutementsView : UserControl
+public partial class GuildMembersView : UserControl
 {
-    public RecrutementsView()
+    public GuildMembersView()
     {
         InitializeComponent();
     }
