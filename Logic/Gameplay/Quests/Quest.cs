@@ -6,15 +6,11 @@ namespace GuildManager.Logic.Gameplay.Quests;
 
 // A quest offered to the guild. GDD 6.1: every quest has restrictions on
 // which adventurers can be assigned; GDD 6.5: every quest has a duration in
-// hours, charged against the day's 16-hour budget. Boss fights add a full
-// category requirement (Warrior+Healer+Mage); ordinary quests can instead
-// require a single specific class (e.g. Escort needs a Warrior).
-// FR : Une quête proposée à la guilde. Les combats de boss exigent les 3
-// catégories ; les quêtes ordinaires peuvent exiger une seule classe précise
-// (ex : Escorte nécessite un Guerrier).
+// hours, charged against the day's 16-hour budget.
 public sealed class Quest
 {
     public string Name { get; }
+    public int DayAvailable { get; }
     public QuestType Type { get; }
     public int Difficulty { get; }
     public int DurationHours { get; }
@@ -38,12 +34,13 @@ public sealed class Quest
     public bool IsResolved { get; private set; }
     public bool WasSuccessful { get; private set; }
 
-    public Quest(string name, QuestType type, int difficulty, int durationHours,
+    public Quest(string name, int dayAvailable, QuestType type, int difficulty, int durationHours,
         int goldReward, int minimumLevelRequired = 1, int minimumTeamSize = 1,
         int maximumTeamSize = 5, bool requiresAllRecruitCategories = false,
         string? requiredClassName = null)
     {
         Name = name;
+        DayAvailable = dayAvailable;
         Type = type;
         Difficulty = difficulty;
         DurationHours = durationHours;
@@ -55,11 +52,27 @@ public sealed class Quest
         RequiredClassName = requiredClassName;
     }
 
-    // Records the outcome of the quest; can only be called once.
-    // FR : Enregistre l'issue de la quête ; ne peut être appelé qu'une fois.
+    // Records the outcome of the quest; can only be called once during
+    // normal gameplay flow.
+    // FR : Enregistre l'issue de la quête ; ne peut être appelé qu'une fois
+    // dans le déroulement normal du jeu.
     public void MarkResolved(bool wasSuccessful)
     {
         IsResolved = true;
+        WasSuccessful = wasSuccessful;
+    }
+
+    // Restores a previously-resolved quest's state from a save file,
+    // bypassing the normal resolution flow (no "already resolved" check,
+    // no side effects). Meant to be called only by the persistence layer
+    // right after loading a Quest from the database.
+    // FR : Restaure l'état d'une quête déjà résolue depuis une sauvegarde,
+    // sans passer par le flux de résolution normal (pas de vérification
+    // "déjà résolue", pas d'effet de bord). Réservé à la couche
+    // persistance, juste après le chargement d'une Quest depuis la BDD.
+    public void RestoreResolution(bool isResolved, bool wasSuccessful)
+    {
+        IsResolved = isResolved;
         WasSuccessful = wasSuccessful;
     }
 
