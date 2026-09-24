@@ -7,11 +7,15 @@ using GuildManager.Logic.Gameplay.Resources;
 
 namespace GuildManager.Logic.Gameplay;
 
-// Aggregates the full state of a playthrough: roster, resources, day cycle,
-// active narration, and the pool of unique recruit names. This is the root
-// object the UI and API consult.
-// FR : Agrège l'état complet d'une partie : roster, ressources, cycle de
-// jour, narration active, et le pool de noms uniques. Objet racine.
+// Aggregates the full state of a playthrough
+
+public enum EndingType
+{
+    None,
+    Good,
+    Bad
+}
+
 public sealed class Guild
 {
     public const int HpRestoredPerPotion = 10;
@@ -21,6 +25,13 @@ public sealed class Guild
     // FR : En dessous de ce taux de réussite estimé, une quête ratée tue
     // toute l'équipe au lieu de simplement la blesser.
     public const int DeathThreshold = 30;
+
+    // "Debt collector" end condition (GDD): evaluated once day 10 is
+    // reached, not a quest of its own.
+    // FR : Condition de fin "récolteur de dette" : évaluée une fois le
+    // jour 10 atteint, ce n'est pas une quête à part entière.
+    private const int DebtDeadlineDay = 10;
+    private const int DebtThreshold = 5000;
 
     public List<Adventurer> Roster { get; } = new();
     public GuildResources Resources { get; } = new();
@@ -133,5 +144,25 @@ public sealed class Guild
 
         recruit.Heal(HpRestoredPerPotion);
         return true;
+    }
+
+    // Evaluates the end-of-run "debt collector" condition once day 10 is
+    // reached: the guild closes on a bad ending unless it holds at least
+    // DebtThreshold gold. Standalone mechanic, not a Quest/QuestType.
+    // NOTE: assumes DayCycle exposes CurrentDay and GuildResources exposes
+    // Gold — adjust the two property names below if yours differ.
+    // FR : Évalue la condition de fin "récolteur de dette" une fois le
+    // jour 10 atteint : la guilde ferme sur une mauvaise fin sauf si elle
+    // détient au moins DebtThreshold pièces d'or. Mécanisme autonome, pas
+    // une Quest/QuestType.
+    // NOTE : suppose que DayCycle expose CurrentDay et GuildResources
+    // expose Gold — ajuste ces deux noms de propriété s'ils diffèrent
+    // chez toi.
+    public EndingType EvaluateEnding()
+    {
+        if (Cycle.CurrentDay < DebtDeadlineDay)
+            return EndingType.None;
+
+        return Resources.Gold >= DebtThreshold ? EndingType.Good : EndingType.Bad;
     }
 }
