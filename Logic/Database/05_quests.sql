@@ -3,15 +3,6 @@
 -- Matches GuildManager.Logic.Gameplay.Quests.Quest (C#).
 -- ============================================================
 
-CREATE TYPE quest_type AS ENUM (
-    'Escort',
-    'Exorcism',
-    'DungeonExploration',
-    'SpecialAdventurer',
-    'ImprobableNpc',
-    'BossFight'
-);
-
 CREATE TABLE quests (
     id                                 SERIAL PRIMARY KEY,
     guild_id                           INTEGER NOT NULL REFERENCES guilds(id) ON DELETE CASCADE,
@@ -22,7 +13,10 @@ CREATE TABLE quests (
 
     name                                VARCHAR(150) NOT NULL,
     day_available                       INTEGER NOT NULL CHECK (day_available BETWEEN 1 AND 10),
-    type                                quest_type NOT NULL,
+
+    type                                VARCHAR(20) NOT NULL
+        CHECK (type IN ('Escort', 'Exorcism', 'DungeonExploration', 'SpecialAdventurer', 'ImprobableNpc', 'BossFight')),
+
     difficulty                          INTEGER NOT NULL,
     duration_hours                      INTEGER NOT NULL,
     gold_reward                         INTEGER NOT NULL DEFAULT 0,

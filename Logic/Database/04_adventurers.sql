@@ -2,21 +2,16 @@
 -- 4. ADVENTURERS
 -- ============================================================
 
--- Category: playable class (Warrior/Healer/Mage) or special adventurer
-CREATE TYPE adventurer_category AS ENUM ('Warrior', 'Healer', 'Mage', 'Special');
-
--- 'Dead' is kept as a status (soft delete) rather than removing the row,
--- even though Guild.AttemptQuest() removes dead recruits from the
--- in-memory Roster list -- confirm this approach with the team.
-CREATE TYPE adventurer_status AS ENUM ('Available', 'OnQuest', 'Dead', 'Injured');
-
 CREATE TABLE adventurers (
     id                      SERIAL PRIMARY KEY,
     guild_id                INTEGER NOT NULL REFERENCES guilds(id) ON DELETE CASCADE,
     owner_player_id         INTEGER NOT NULL REFERENCES players(id) ON DELETE CASCADE,
 
     name                    VARCHAR(100) NOT NULL,
-    category                adventurer_category NOT NULL,
+
+    -- Playable class (Warrior/Healer/Mage) or special adventurer
+    category                VARCHAR(10) NOT NULL
+        CHECK (category IN ('Warrior', 'Healer', 'Mage', 'Special')),
 
     -- 'Elowen' / 'Meloap' / 'Sameth' if category = 'Special', NULL otherwise
     special_key             VARCHAR(50),
@@ -34,7 +29,11 @@ CREATE TABLE adventurers (
     -- start of each new day (see Guild.ResetDailyUsage()).
     used_today              BOOLEAN NOT NULL DEFAULT FALSE,
 
-    status                  adventurer_status NOT NULL DEFAULT 'Available',
+    -- 'Dead' is kept as a status (soft delete) rather than removing the
+    -- row, even though Guild.AttemptQuest() removes dead recruits from
+    -- the in-memory Roster list.
+    status                  VARCHAR(10) NOT NULL DEFAULT 'Available'
+        CHECK (status IN ('Available', 'OnQuest', 'Dead', 'Injured')),
 
     created_at              TIMESTAMP NOT NULL DEFAULT NOW(),
 
