@@ -55,6 +55,8 @@
                         VerticalAlignment="Bottom"
                         Margin="30" />
 
+                    <ContentControl x:Name="PageContent" />
+
                     <Canvas>
                         <Button
                             Width="80"
@@ -74,70 +76,27 @@
                             BorderThickness="0"
                             Click="NextPageButton_Click" />
 
-                        <Button
-                            Width="345"
-                            Height="80"
-                            Canvas.Left="250"
-                            Canvas.Top="200"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit1Button_Click" />
+                        <!--Canvas.Top modifiquation de l'espace la ou il y a le compteur de pages-->
+                        <!-- Affichage du numéro de page -->
+                        <Border
+                            Width="150"
+                            Height="50"
+                            Canvas.Left="551"
+                            Canvas.Top="560" 
+                            Background="#D8C08A"
+                            BorderBrush="#8B6F3E"
+                            BorderThickness="2" >
 
-                        <Button
-                            Width="345"
-                            Height="80"
-                            Canvas.Left="250"
-                            Canvas.Top="285"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit2Button_Click" />
-
-                        <Button
-                            Width="355"
-                            Height="80"
-                            Canvas.Left="240"
-                            Canvas.Top="370"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit3Button_Click" />
-                        
-                        <Button
-                            Width="345"
-                            Height="80"
-                            Canvas.Left="240"
-                            Canvas.Top="457"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit4Button_Click" />
-
-                        <Button
-                            Width="345"
-                            Height="80"
-                            Canvas.Left="655"
-                            Canvas.Top="200"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit5Button_Click" />
-
-                        <Button
-                            Width="350"
-                            Height="80"
-                            Canvas.Left="655"
-                            Canvas.Top="285"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit6Button_Click" />
-                        
-                        <Button
-                            Width="355"
-                            Height="80"
-                            Canvas.Left="660"
-                            Canvas.Top="370"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit7Button_Click" />
-
-                        <Button
-                            Width="350"
-                            Height="80"
-                            Canvas.Left="665"
-                            Canvas.Top="457"
-                            Style="{StaticResource InvisibleButtonStyle}"
-                            Click="Unit8Button_Click" />
-
+                            <TextBlock
+                                x:Name="PageNumberText"
+                                Text="Page 1 / 2"
+                                FontFamily="Georgia"
+                                FontSize="20"
+                                Foreground="#3D2E18"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextAlignment="Center" />
+                        </Border>
                         
                     </Canvas>
                 </Grid>

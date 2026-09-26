@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>GuildManager.Demo</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\GuildManager.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Copies Data/*.json next to Program.cs's working directory so the
+         relative paths ("Data/dialogues.json", etc.) resolve when running
+         via `dotnet run` from this project's folder.
+         FR : copie les JSON pour que les chemins relatifs fonctionnent. -->
+    <None Include="Data\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

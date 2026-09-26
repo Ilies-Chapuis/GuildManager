@@ -1,0 +1,233 @@
+[
+  {
+    "Id": "guild_founding",
+    "Day": 1,
+    "Character": "Narrator",
+    "SeriousText": "Fort de sa victoire à Tartaros, le héros fonde sa propre Guilde d'Aventuriers à Fadriann. Une rumeur parle d'un « chant » venu des collines. Adieu Melvin Petit ange parti trop tard ce dev c'est explosé le crane sur le plan de travail bisou bisou",
+    "WtfText": "Fort de sa victoire à Tartaros, le héros fonde sa propre Guilde d'Aventuriers à Fadriann — et déjà, un âne en trench-coat rôde près de l'entrée."
+  },
+  {
+    "Id": "sameth_joins",
+    "Day": 1,
+    "Character": "Sameth",
+    "SeriousText": "Je te dois bien ça. Laisse-moi gérer les comptes et les fournisseurs, pendant que tu formes tes recrues.",
+    "WtfText": "Je gère les comptes, les fournisseurs, et accessoirement je vends des trucs qui tombent parfois du camion. Détail sans importance."
+  },
+  {
+    "Id": "meloap_joins",
+    "Day": 1,
+    "Character": "Meloap",
+    "SeriousText": "Là où tu iras, je te suivrai. C'était vrai à la porte magique, ça le reste aujourd'hui.",
+    "WtfText": "Je te suis partout, comme à la porte magique. Sauf si ça implique de l'eau froide. Là, on négocie."
+  },
+  {
+    "Id": "elowen_joins",
+    "Day": 1,
+    "Character": "Elowen",
+    "SeriousText": "Je n'ai pas combattu à Tartaros à tes côtés, mais la forêt m'a parlé de ta guilde. J'y ai ma place.",
+    "WtfText": "La forêt m'a parlé de ta guilde. Enfin, un arbre a fait un bruit bizarre, j'ai décidé que ça voulait dire ça."
+  },
+  {
+    "Id": "first_escort",
+    "Day": 2,
+    "Character": "Narrator",
+    "SeriousText": "La première escorte de la guilde se déroule sans accroc. Un début rassurant, presque trop calme.",
+    "WtfText": "La première escorte se déroule sans accroc, si on ignore le fait que le marchand a essayé de vendre la charrette elle-même."
+  },
+  {
+    "Id": "improbable_npc_encounter",
+    "Day": 2,
+    "Character": "Narrator",
+    "SeriousText": "Sur le chemin du retour, une silhouette étrange observe la guilde depuis un fossé. Elle ne s'approche pas.",
+    "WtfText": "Sur le chemin du retour, un âne en trench-coat propose ses services. Personne ne sait pourquoi un âne porte un trench-coat."
+  },
+  {
+    "Id": "first_exorcism",
+    "Day": 3,
+    "Character": "Narrator",
+    "SeriousText": "Le premier exorcisme confirme les craintes : le miasme est déjà plus actif qu'une simple menace résiduelle ne devrait l'être.",
+    "WtfText": "Le Chat qui parle affirme que le « service » qu'il demande est de la plus haute importance. Personne n'a réussi à savoir en quoi il consiste."
+  },
+  {
+    "Id": "elowen_forest_whispers",
+    "Day": 3,
+    "Character": "Elowen",
+    "SeriousText": "La forêt murmure des choses inquiétantes, ces derniers temps. Le miasme progresse plus vite qu'il ne devrait.",
+    "WtfText": "Le Pigeon dit qu'il porte un message royal urgent. Je le traduis fidèlement : il ment, mais avec panache."
+  },
+  {
+    "Id": "sameth_hedge_symbol",
+    "Day": 4,
+    "Character": "Sameth",
+    "SeriousText": "Je reconnais ce symbole... c'est celui de Hedge. Le miasme n'a jamais vraiment disparu.",
+    "WtfText": "Ce symbole me rappelle vaguement un logo de taverne où j'ai eu des ennuis. Rien de grave, sûrement."
+  },
+  {
+    "Id": "meloap_first_doubt",
+    "Day": 4,
+    "Character": "Meloap",
+    "SeriousText": "Une résurgence si tôt après Tartaros... ça ne me plaît pas. Restons prudents.",
+    "WtfText": "Une résurgence si tôt après Tartaros... enfin, ou alors c'est juste un chat qui a mangé des herbes bizarres."
+  },
+  {
+    "Id": "meloap_missing_friend",
+    "Day": 5,
+    "Character": "Meloap",
+    "SeriousText": "Un ancien compagnon de l'expédition à Tartaros a disparu. Je crains que ce ne soit pas une coïncidence.",
+    "WtfText": "Un ancien compagnon a disparu. Il a probablement juste oublié où il habite, ça arrive à tout le monde."
+  },
+  {
+    "Id": "nyxaria_boss_encounter",
+    "Day": 5,
+    "Character": "Nyxaria",
+    "SeriousText": "Nyxaria émerge des flots noirs, auréolée d'or, ses tentacules balayant la côte de Fadriann. Elle tourne vers toi un regard qui n'a rien d'humain. « Petit maître de guilde, tu crois pouvoir endiguer une marée que ni les rois ni les dieux n'ont su repousser ? Le miasme a choisi cette côte, et il a choisi ton nom. Montre-moi ce que valent tes recrues, ou rejoins les navires qui reposent déjà à mes pieds. »",
+    "WtfText": "Nyxaria émerge des flots, auréolée d'or et flanquée de tentacules dégoulinantes. Elle te regarde, l'air presque déçue. « Ah. C'est toi, le fameux maître de guilde ? On m'avait promis un héros, pas quelqu'un qui a manifestement oublié de mettre des bottes imperméables. Sameth, arrête d'essayer de me vendre une assurance, ce n'est vraiment pas le moment. »"
+  },
+  {
+    "Id": "nyxaria_taunt",
+    "Day": 5,
+    "Character": "Nyxaria",
+    "SeriousText": "« Tu t'accroches, » siffle Nyxaria en resserrant ses tentacules autour des rochers. « C'est plus que n'en ont fait la plupart. Mais l'océan n'a jamais eu besoin de gagner vite : il n'a besoin que de gagner, une vague après l'autre, jusqu'à ce qu'il ne reste plus rien à emporter. »",
+    "WtfText": "« Tu t'accroches, » dit Nyxaria en levant les yeux au ciel. « Sérieusement, à ce stade je me demande si c'est du courage ou si tu ne sais juste pas reconnaître une défaite écrasante quand elle te noie jusqu'au cou. Littéralement. »"
+  },
+  {
+    "Id": "nyxaria_defeat",
+    "Day": 5,
+    "Character": "Nyxaria",
+    "SeriousText": "Les tentacules de Nyxaria se rétractent lentement dans l'écume, sa couronne dorée vacillant comme une flamme qui s'éteint. « Ce round est le tien, maître de guilde. Mais la marée reviendra — elle revient toujours. » Elle s'enfonce dans les profondeurs, laissant la côte plus calme qu'elle ne l'a été depuis des années.",
+    "WtfText": "Nyxaria s'enfonce dans les vagues en marmonnant quelque chose à propos d'un remboursement. « Très bien, TRÈS BIEN, tu gagnes cette fois. Mais dis à ton marchand que son assurance dégâts des eaux, je vais peut-être finir par la prendre. » Et elle disparaît, non sans un dernier éclaboussement clairement vengeur."
+  },
+  {
+    "Id": "elowen_miasma_growing",
+    "Day": 5,
+    "Character": "Elowen",
+    "SeriousText": "Les racines elles-mêmes semblent fuir une zone à l'est. Quelque chose s'y installe, lentement.",
+    "WtfText": "Les racines fuient une zone à l'est. Ou alors c'est juste que le sol y est très mauvais pour le jardinage."
+  },
+  {
+    "Id": "resource_crisis",
+    "Day": 6,
+    "Character": "Narrator",
+    "SeriousText": "Les réserves de la guilde s'amenuisent. Nourrir un roster grandissant a un coût que Sameth peine à couvrir.",
+    "WtfText": "Les réserves de la guilde s'amenuisent, en grande partie parce que l'Âne a « emprunté » la moitié du garde-manger."
+  },
+  {
+    "Id": "injured_recruit",
+    "Day": 6,
+    "Character": "Narrator",
+    "SeriousText": "Une recrue rentre gravement blessée d'une quête d'exorcisme. L'adversaire était bien plus fort que prévu.",
+    "WtfText": "Une recrue rentre blessée. Officiellement d'un combat féroce. Officieusement, elle a trébuché sur le Chat."
+  },
+  {
+    "Id": "minor_cult_resurgence",
+    "Day": 7,
+    "Character": "Narrator",
+    "SeriousText": "Des héritiers du culte d'Orannis tentent de voler un fragment de L'Égide de Tartaros.",
+    "WtfText": "Une guerre commerciale éclate entre l'Âne et le Pigeon. La guilde se retrouve prise entre deux feux, au sens propre."
+  },
+  {
+    "Id": "sameth_market_rumor",
+    "Day": 7,
+    "Character": "Sameth",
+    "SeriousText": "Des marchands parlent d'un sanctuaire profané à l'est. Personne n'ose s'y rendre.",
+    "WtfText": "Des marchands parlent d'un sanctuaire profané à l'est. J'y ai déjà envoyé un panneau « Reliques authentiques, -20% »."
+  },
+  {
+    "Id": "meloap_scout_report",
+    "Day": 8,
+    "Character": "Meloap",
+    "SeriousText": "J'ai éclairé la zone à l'est. Ce que j'y ai vu confirme le pire : le miasme s'organise.",
+    "WtfText": "J'ai éclairé la zone à l'est. J'y ai surtout vu un cochon très bien habillé. Je l'ai salué, par respect."
+  },
+  {
+    "Id": "sameth_confronted_by_cultist",
+    "Day": 8,
+    "Character": "Sameth",
+    "SeriousText": "Un ancien cultiste m'a reconnu. Il dit que je les ai trahis en me faisant exorciser. Peut-être a-t-il raison.",
+    "WtfText": "Un ancien cultiste m'a reconnu et m'a fait une remise sur des robes de cérémonie. Le monde est petit."
+  },
+  {
+    "Id": "elowen_omen",
+    "Day": 9,
+    "Character": "Elowen",
+    "SeriousText": "Les oiseaux ont fui la forêt à l'aube. Ils ne se trompent jamais sur ce genre de choses.",
+    "WtfText": "Les oiseaux ont fui la forêt à l'aube. Le Pigeon, lui, est resté. Il dit que c'est par principe."
+  },
+  {
+    "Id": "miasma_herald",
+    "Day": 9,
+    "Character": "Narrator",
+    "SeriousText": "À l'horizon de Fadriann se dessine une silhouette massive, plus large que n'importe quel homme n'aurait dû l'être. Grendel s'avance, sa massue enflammée traînant une traînée de cendres derrière lui. « Le Comité m'envoie collecter une dette, » gronde-t-il sans même te regarder. « Vous avez jusqu'à demain pour la rassembler. Après, je ne viendrai plus demander. »",
+    "WtfText": "À l'horizon de Fadriann se dessine une silhouette massive qui sent la fumée de cigare à trois kilomètres. Grendel s'avance, sa massue enflammée traînant une traînée de cendres. « Le Comité m'envoie collecter une dette, » gronde-t-il en tirant une bouffée. « Vous avez jusqu'à demain. Après ça, je cesse d'être poli, et croyez-moi, vous ne voulez pas voir Grendel impoli. »"
+  },
+  {
+    "Id": "day10_ledger",
+    "Day": 10,
+    "Character": "Narrator",
+    "SeriousText": "Le grand livre de comptes de la guilde est ouvert. Le sort de tous en dépend.",
+    "WtfText": "Le Grand Comité des Bêtes exige de voir le grand livre de comptes séance tenante."
+  },
+  {
+    "Id": "final_boss_showdown",
+    "Day": 10,
+    "Character": "Narrator",
+    "SeriousText": "Grendel referme son poing noueux autour du manche de sa massue, les braises crépitant à chaque pas qu'il fait vers toi. « Tu as eu ton délai, maître de guilde. Maintenant montre-moi le grand livre — ou montre-moi ce que vaut ta guilde en cendres. » Le combat final pour Fadriann commence.",
+    "WtfText": "Grendel fait craquer ses phalanges et tire une dernière bouffée de son cigare avant de l'écraser sous une patte massive. « Le Comité n'aime pas attendre, et moi encore moins, » dit-il en pointant sa massue vers toi. « Alors soit tu me montres l'or, soit je commence à casser des meubles. Ton choix. »"
+  },
+  {
+    "Id": "grendel_taunt",
+    "Day": 10,
+    "Character": "Grendel",
+    "SeriousText": "« Tu frappes fort pour un gestionnaire de guilde, » admet Grendel en essuyant une entaille sur son bras noir comme la nuit. « Mais le Comité ne recule jamais devant une dette impayée. Chaque coup que tu portes, je le retiens — et je le rends avec intérêts. »",
+    "WtfText": "« Pas mal, » dit Grendel en rallumant un nouveau cigare au beau milieu du combat. « Sincèrement, meilleure résistance que le dernier gars qu'on a envoyé collecter. Lui, il a couru. Toi, au moins, tu te bats. Ça ne changera rien au résultat, mais j'apprécie l'effort. »"
+  },
+  {
+    "Id": "grendel_defeat",
+    "Day": 10,
+    "Character": "Grendel",
+    "SeriousText": "Grendel s'effondre sur un genou, sa massue s'éteignant dans un dernier crépitement de braises. « Le Comité entendra parler de ça, » gronde-t-il en se relevant péniblement. « Mais une dette repoussée n'est pas une dette annulée, maître de guilde. On se reverra. » Il se retire dans les ombres, laissant Fadriann debout, pour l'instant.",
+    "WtfText": "Grendel s'effondre sur un genou, son cigare s'écrasant piteusement dans la poussière. « Bon. BON. Vous gagnez cette manche, » grommelle-t-il en se relevant. « Je dirai au Comité que le remboursement est... en cours de négociation. » Il s'éclipse en boitant légèrement, non sans ramasser son cigare éteint au passage — même en fuite, Grendel ne gaspille rien."
+  },
+  {
+    "Id": "sameth_farewell_thought",
+    "Day": 10,
+    "Character": "Sameth",
+    "SeriousText": "Quoi qu'il arrive aujourd'hui, merci de m'avoir laissé une chance de me racheter.",
+    "WtfText": "Quoi qu'il arrive aujourd'hui, j'ai déjà mis les reliques les plus chères de côté. Juste au cas où."
+  },
+  {
+    "Id": "meloap_final_stand",
+    "Day": 10,
+    "Character": "Meloap",
+    "SeriousText": "Je me suis tenu à tes côtés depuis la porte magique. Je m'y tiendrai jusqu'au bout, aujourd'hui encore.",
+    "WtfText": "Je me suis tenu à tes côtés depuis la porte magique, et je compte bien voir comment cette histoire de comité se termine."
+  },
+  {
+    "Id": "elowen_final_watch",
+    "Day": 10,
+    "Character": "Elowen",
+    "SeriousText": "La forêt retient son souffle. Quel que soit le verdict du jour, elle s'en souviendra.",
+    "WtfText": "La forêt retient son souffle. Le Pigeon aussi, mais lui, c'est juste qu'il a trop mangé."
+  },
+  {
+    "Id": "donkey_quest_offer",
+    "Day": 2,
+    "Character": "The Black Market Donkey",
+    "SeriousText": "Un étrange marchand insiste pour vous proposer une affaire douteuse. Vous déclinez et poursuivez votre chemin.",
+    "WtfText": "« Psst. J'ai un service à te proposer, et crois-moi, tu ne veux pas savoir en quoi il consiste. » L'Âne du marché noir sourit sous son monocle fêlé."
+  },
+  {
+    "Id": "pigeon_escort_request",
+    "Day": 2,
+    "Character": "The Self-Proclaimed Messenger Pigeon",
+    "SeriousText": "Un pigeon particulièrement agité tourne autour de la guilde. Personne n'y prête vraiment attention.",
+    "WtfText": "« Message royal ! Urgentissime ! » Le Pigeon messager exige une escorte immédiate, sacoche miniature à l'appui."
+  },
+  {
+    "Id": "cat_vague_contract",
+    "Day": 3,
+    "Character": "The Talking Cat (only at night)",
+    "SeriousText": "Une ombre féline observe la guilde depuis les toits, silencieuse, indifférente.",
+    "WtfText": "« J'ai un contrat pour toi. Les termes ? Disons... flexibles. » Le Chat qui parle ne sourit jamais tout à fait innocemment."
+  }
+]

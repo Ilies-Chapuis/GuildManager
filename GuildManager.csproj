@@ -20,4 +20,19 @@
     <Resource Include="Assets\Options.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Logic\**" />
+    <EmbeddedResource Remove="Logic\**" />
+    <None Remove="Logic\**" />
+    <Page Remove="Logic\**" />
+    <Compile Remove="Demo\**" />
+    <EmbeddedResource Remove="Demo\**" />
+    <None Remove="Demo\**" />
+    <Page Remove="Demo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+  <ProjectReference Include="Logic\GuildManager.Logic.csproj" />
+  </ItemGroup>
+
 </Project>

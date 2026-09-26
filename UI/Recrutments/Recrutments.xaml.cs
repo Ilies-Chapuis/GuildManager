@@ -1,15 +1,31 @@
 using System.Windows;
 using System.Windows.Controls;
 using GuildManager.UI.The_Game;
+using GuildManager.UI.Pages_Navigation;
+using GuildManager.UI.RecrutementsPageView;
 using GuildManager.UI.The_MainWindow;
 
 namespace GuildManager.UI.Recrutments;
 
 public partial class RecrutementsView : UserControl
 {
+    private PageNavigator _pageNavigator;
+
     public RecrutementsView()
     {
         InitializeComponent();
+
+        // Création du navigateur de pages et enregistrement de la page actuelle
+        // new PageNavigator(new UserControl[] => se lit comme Crée un tableau de UserControl et mets RecrutementsPage1View dedans.
+        // Création du navigateur avec la liste des pages qu'il devra gérer.
+        _pageNavigator = new PageNavigator(new UserControl[]
+        {
+            new RecrutementsPage1View(),
+            new RecrutementsPage2View()
+        });
+
+        // Affiche la page actuellement sélectionnée dans le ContentControl
+        UpdatePage();
     }
 
     private void ReturnButton_Click(object sender, RoutedEventArgs e)
@@ -20,51 +36,21 @@ public partial class RecrutementsView : UserControl
 
     private void PreviousPageButton_Click(object sender, RoutedEventArgs e)
     {
-        
+        _pageNavigator.PreviousPage();
+        UpdatePage();
     }
 
     private void NextPageButton_Click(object sender, RoutedEventArgs e)
     {
-        
+        _pageNavigator.NextPage();
+        UpdatePage();
     }
 
-    private void Unit1Button_Click(object sender, RoutedEventArgs e)
+    private void UpdatePage()
     {
-        MessageBox.Show("Unité 1 sélectionnée !");
-    }
-
-    private void Unit2Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 2 sélectionnée !");
-    }
-
-    private void Unit3Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 3 sélectionnée !");
-    }
-
-    private void Unit4Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 4 sélectionnée !");
-    }
-
-    private void Unit5Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 5 sélectionnée !");
-    }
-
-    private void Unit6Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 6 sélectionnée !");
-    }
-
-    private void Unit7Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 7 sélectionnée !");
-    }
-
-    private void Unit8Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show("Unité 8 sélectionnée !");
+        PageContent.Content = _pageNavigator.GetCurrentPage();
+        PageNumberText.Text=
+            // Met à jour l'indicateur pour afficher la page actuelle et le nombre total de pages
+            $"Page {_pageNavigator.CurrentPageNumber} / {_pageNavigator.TotalPages}";
     }
 }
