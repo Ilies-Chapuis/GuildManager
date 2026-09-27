@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "GuildManager.Demo/1.0.0": {
+        "dependencies": {
+          "GuildManager.Logic": "1.0.0"
+        },
+        "runtime": {
+          "GuildManager.Demo.dll": {}
+        }
+      },
+      "GuildManager.Logic/1.0.0": {
+        "runtime": {
+          "GuildManager.Logic.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GuildManager.Demo/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GuildManager.Logic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
