@@ -7,6 +7,6 @@ public sealed class Mage : Adventurer
 {
     public Mage(string name) : base(name, healthPoints: 22)
     {
-        BaseSuccessRate = 340; // recrue générique : 35-45%, valeur basse de la fourchette
+        BaseSuccessRate = 40; // recrue générique : 35-45%, valeur basse de la fourchette
     }
 }
