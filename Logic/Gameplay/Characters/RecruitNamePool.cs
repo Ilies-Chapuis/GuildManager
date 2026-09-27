@@ -18,7 +18,7 @@ public sealed class RecruitNamePool
 
     // Loads the full name list from JSON; nothing is marked used yet.
     // FR : Charge la liste complète des noms depuis le JSON ; rien n'est encore pris.
-    public RecruitNamePool(string jsonPath = "Data/recruit_names.json")
+    public RecruitNamePool(string jsonPath = "Demo/Data/recruit_names.json")
     {
         string content = File.ReadAllText(jsonPath);
         _availableNames = JsonSerializer.Deserialize<List<string>>(content) ?? new List<string>();
