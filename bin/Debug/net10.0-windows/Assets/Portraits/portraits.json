@@ -1,0 +1,130 @@
+{
+  "_comment": "Noms d'emotions = best-guess d'apres la miniature de chaque case. Renomme librement (cle a gauche) sans toucher au code : le champ 'Emotion' de dialogues.json cherche juste une cle ici. Un index numerique brut ('7') marche aussi si tu ne veux pas encore nommer.",
+
+  "BoxSkins": {
+    "Default": "Sameth_dialogue.png",
+    "Nature": "Elowen_dialogues_box.png"
+  },
+
+  "_scenesComment": "Scenes = CG plein ecran (boss), pas de portrait decoupe. TextRect est en pixels natifs de l'image (CanvasWidth x CanvasHeight), un Viewbox se charge de la mise a l'echelle. HasBakedBox=true -> la boite est deja dessinee dans l'illustration (on pose juste le texte dedans, sans dessiner de cadre par-dessus). HasBakedBox=false -> on dessine notre propre panneau (style commun 'boss') a l'emplacement donne.",
+  "Scenes": {
+    "Grendel": {
+      "Image": "Boss_Finale.png",
+      "CanvasWidth": 1672,
+      "CanvasHeight": 941,
+      "HasBakedBox": true,
+      "TextRect": { "X": 995, "Y": 138, "Width": 470, "Height": 90 }
+    },
+    "Nyxaria": {
+      "Image": "Boss_Ocean.png",
+      "CanvasWidth": 1672,
+      "CanvasHeight": 941,
+      "HasBakedBox": false,
+      "TextRect": { "X": 130, "Y": 760, "Width": 1412, "Height": 140 }
+    }
+  },
+
+  "Characters": {
+
+    "Elowen": {
+      "SpriteSheet": "Elowen_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "Emotions": {
+        "Neutral": 0, "NeutralSoft": 1, "NeutralAlt": 2, "LookAway": 3, "LookAway2": 4,
+        "Concerned": 5, "Serious": 6, "Sad": 7, "Determined": 8, "Surprised": 9,
+        "Thinking": 10, "Serious2": 11, "Smile": 12, "Blushing": 13, "Profile": 14
+      }
+    },
+
+    "Sameth": {
+      "SpriteSheet": "Sameth_sprites_.png",
+      "Columns": 7,
+      "Rows": 4,
+      "_comment": "Seules les cases 0-13 (2 premieres lignes) sont des expressions faciales utilisables ici. 14+ = profils/dos, non destines a la dialogue box.",
+      "Emotions": {
+        "Neutral": 0, "Serious": 1, "Determined": 2, "Smiling": 3, "Neutral2": 4, "Pained": 5, "Shocked": 6,
+        "Neutral3": 7, "Sad": 8, "Neutral4": 9, "Serious2": 10, "Concerned": 11, "Thinking": 12, "Concerned2": 13
+      }
+    },
+
+    "Meloap": {
+      "SpriteSheet": "Meloap_sprites_.png",
+      "Columns": 6,
+      "Rows": 3,
+      "Emotions": {
+        "Neutral": 0, "Serious": 1, "Grin": 2, "Smiling": 3, "ToothyGrin": 4, "Neutral2": 5,
+        "Serious2": 6, "Grin2": 7, "Serious3": 8, "Neutral3": 9, "Serious4": 10, "Thinking": 11,
+        "Serious5": 12, "Neutral4": 13, "Serious6": 14, "Neutral5": 15, "Grin3": 16, "Profile": 17
+      }
+    },
+
+    "The Black Market Donkey": {
+      "SpriteSheet": "Ane_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "Emotions": {
+        "Sly": 0, "Grin": 1, "Sly2": 2, "BigGrin": 3, "Neutral": 4, "Shocked": 5,
+        "Nervous": 6, "Sly3": 7, "Sly4": 8, "Wink": 9, "Furious": 10, "Talking": 11,
+        "Neutral2": 12, "Sly5": 13, "Sly6": 14
+      }
+    },
+
+    "The Talking Cat (only at night)": {
+      "SpriteSheet": "Chat_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "Emotions": {
+        "Neutral": 0, "Smirk": 1, "Smirk2": 2, "Laughing": 3, "Grin": 4, "Surprised": 5,
+        "Serious": 6, "Sly": 7, "Thinking": 8, "Smug": 9, "Angry": 10, "OpenMouth": 11,
+        "Grin2": 12, "Serious2": 13, "Wink": 14
+      }
+    },
+
+    "The Self-Proclaimed Messenger Pigeon": {
+      "SpriteSheet": "Pigeon_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "Emotions": {
+        "Neutral": 0, "Smug": 1, "Sly": 2, "Talking": 3, "Sly2": 4,
+        "Shocked": 5, "Nervous": 6, "Serious": 7, "Serious2": 8, "Sleepy": 9,
+        "Angry": 10, "Talking2": 11, "Serious3": 12, "Serious4": 13, "Sparkle": 14
+      }
+    },
+
+    "Warrior": {
+      "SpriteSheet": "Guerrier_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "_comment": "Portrait generique pour le type de recrue 'Warrior' (generic_recruits.json).",
+      "Emotions": {
+        "Serious": 0, "Serious2": 1, "Determined": 2, "Smiling": 3, "SeriousProfile": 4,
+        "Shocked": 5, "Angry": 6, "Neutral": 7, "Thinking": 8, "Tired": 9,
+        "Furious": 10, "Shouting": 11, "Neutral2": 12, "Serious3": 13, "Confident": 14
+      }
+    },
+
+    "Mage": {
+      "SpriteSheet": "Mage_Noir_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "_comment": "Portrait generique pour le type de recrue 'Mage' (generic_recruits.json).",
+      "Emotions": {
+        "Neutral": 0, "Smile": 1, "Confident": 2, "Laughing": 3, "Serious": 4, "Surprised": 5,
+        "Serious2": 6, "Angry": 7, "Thinking": 8, "Smile2": 9, "Furious": 10, "Laughing2": 11,
+        "Smile3": 12, "Serious3": 13, "Smirk": 14
+      }
+    },
+
+    "Healer": {
+      "SpriteSheet": "Healer_sprites_.png",
+      "Columns": 5,
+      "Rows": 3,
+      "Emotions": {
+        "Neutral": 0, "Sad": 1, "Neutral2": 2, "Shy": 3, "Tired": 4, "Neutral3": 5,
+        "Sad2": 6, "Worried": 7, "Crying": 8, "Nervous": 9, "Sad3": 10, "Worried2": 11,
+        "Shy2": 12, "Nervous2": 13, "Crying2": 14
+      }
+    }
+  }
+}
