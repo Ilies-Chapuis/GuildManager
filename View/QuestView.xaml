@@ -1,0 +1,109 @@
+<UserControl x:Class="GuildManager.UI.Quest.QuestView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager">
+
+        <UserControl.Resources>
+
+            <Style x:Key="QuestBackButtonStyle" TargetType="Button" >
+                <Setter Property="FontFamily" Value="Georgia" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="Background" Value="#D8C08A" />
+                <Setter Property="BorderBrush" Value="#8B6F3E" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Padding" Value="15,5" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+
+                <!--Style used for invisible buttons.
+                Background="Transparent" makes the button invisible
+                while keeping its clickable area.
+                The ControlTemplate replaces the default WPF button
+                appearance to remove the blue hover effect.
+                The Border acts as the button's visual surface.
+                TemplateBinding Background retrieves the Background
+                defined on the button.
+                The ContentPresenter displays the button's content,
+                if it has any.-->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </UserControl.Resources>
+
+        <Grid Background="#05030A">
+            <Viewbox Stretch="Uniform">
+                <Grid Width="1253" Height="705">
+                    <Image x:Name="Menu_quêtes"
+                        Source="/GuildManager;component/Assets/Menu_quetes.png"
+                        Stretch="Fill"
+                        Width="1253"
+                        Height="705" />
+                    <Canvas>
+                        <!-- Golden glow around the "Boss Fights" poster,
+                             visible only on days 5 and 10 (see
+                             QuestView.xaml.cs / UpdateBossAvailability). -->
+                        <Border x:Name="BossGlowBorder"
+                                Canvas.Left="417" Canvas.Top="195"
+                                Width="210" Height="295"
+                                BorderBrush="#C9A94E" BorderThickness="4"
+                                CornerRadius="6"
+                                Visibility="Collapsed">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#C9A94E" BlurRadius="25" ShadowDepth="0" Opacity="0.9" />
+                            </Border.Effect>
+                        </Border>
+
+                        <Button
+                            Width="190"
+                            Height="270"
+                            Canvas.Left="845"
+                            Canvas.Top="210"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Quest2Button_Click" />
+
+                        <Button
+                            Width="190"
+                            Height="270"
+                            Canvas.Left="637"
+                            Canvas.Top="210"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="QuestAnnexesButton_Click"/>
+
+                        <Button x:Name="BossButton"
+                            Width="190"
+                            Height="275"
+                            Canvas.Left="427"
+                            Canvas.Top="205"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="QuestBossButton_Click"/>
+                    </Canvas>
+                    <Button
+                        Content="Retour"
+                        Style="{StaticResource QuestBackButtonStyle}"
+                        Click="ReturnButton_Click"
+                        Width="150"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="30" />
+                </Grid>
+            </Viewbox>
+        </Grid>
+</UserControl>

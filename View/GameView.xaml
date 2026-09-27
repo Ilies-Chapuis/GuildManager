@@ -1,0 +1,124 @@
+<UserControl x:Class="GuildManager.UI.The_Game.GameView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager"
+        mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="0">
+
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GameActionButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI Emoji, Georgia" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#3D2E18" />
+            <Setter Property="Background" Value="#D8C08A" />
+            <Setter Property="BorderBrush" Value="#8B6F3E" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding" Value="10,6" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#05030A">
+
+        <Viewbox Stretch="Uniform" >
+
+            <Grid Width="1253" Height="705">
+
+                <Image x:Name="GuildSprites"
+                    Source="/GuildManager;component/Assets/Guild_sprites.png"
+                    Stretch="Fill"
+                    Width="1253"
+                    Height="705" />
+
+                <Canvas>
+                    <Button
+                        Width="280"
+                        Height="90"
+                        Canvas.Left="940"
+                        Canvas.Top="43"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Click="QuetesButton_Click" />
+
+                    <Button
+                        Width="280"
+                        Height="90"
+                        Canvas.Left="940"
+                        Canvas.Top="137"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Click="InventaireButton_Click" />
+
+                    <Button
+                        Width="280"
+                        Height="90"
+                        Canvas.Left="940"
+                        Canvas.Top="233"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Click="RecrutementsButton_Click" />
+
+                    <Button
+                        Width="280"
+                        Height="90"
+                        Canvas.Left="940"
+                        Canvas.Top="325"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Click="OptionsButton_Click" />
+
+                    <Button
+                        Width="280"
+                        Height="90"
+                        Canvas.Left="940"
+                        Canvas.Top="425"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Click="MembresGuildeButton_Click" />
+
+                    <!-- Status bar: day, gold, food, reputation -->
+                    <Border Canvas.Left="20" Canvas.Top="20"
+                            Width="480" Height="60"
+                            Background="#CC05030A" BorderBrush="#8B6F3E" BorderThickness="2"
+                            CornerRadius="6">
+                        <TextBlock x:Name="StatusBarText"
+                                   FontFamily="Segoe UI Emoji, Georgia" FontSize="17" FontWeight="Bold"
+                                   Foreground="#D8C08A"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
+
+                    <!-- Next day / Save -->
+                    <Button Content="🌙 Jour suivant"
+                            Style="{StaticResource GameActionButtonStyle}"
+                            Canvas.Left="20" Canvas.Top="95"
+                            Width="220" Height="45"
+                            Click="NextDayButton_Click" />
+
+                    <Button Content="💾 Sauvegarder"
+                            Style="{StaticResource GameActionButtonStyle}"
+                            Canvas.Left="250" Canvas.Top="95"
+                            Width="220" Height="45"
+                            Click="SaveButton_Click" />
+
+                </Canvas>
+
+            </Grid>
+        </Viewbox>
+    </Grid>
+
+</UserControl>
