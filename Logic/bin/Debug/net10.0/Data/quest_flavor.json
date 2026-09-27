@@ -1,0 +1,56 @@
+[
+  {
+    "Type": "Escort",
+    "Summary": "Protéger une caravane marchande sur la route du village voisin.",
+    "SeriousIntro": "La route est dégagée et des bandits ont été signalés dans les environs. Chaque pas compte.",
+    "WtfIntro": "Le marchand jure que sa cargaison n'a « rien de suspect ». Bien sûr."
+  },
+  {
+    "Type": "Escort",
+    "Summary": "Guider un groupe de pèlerins en sécurité à travers la route forestière.",
+    "SeriousIntro": "Les pèlerins sont désarmés et lents — la moindre embuscade pourrait vite tourner au drame.",
+    "WtfIntro": "Un pèlerin n'arrête pas de demander si les pourboires sont acceptés. Personne ne sait quoi répondre."
+  },
+  {
+    "Type": "Escort",
+    "Summary": "Accompagner un convoi de fournitures jusqu'au poste de garde le plus proche.",
+    "SeriousIntro": "Le chargement est précieux, et la route traverse une zone que le miasme a déjà touchée.",
+    "WtfIntro": "Le convoi transporte principalement des fromages. Des fromages extrêmement bien gardés, apparemment."
+  },
+  {
+    "Type": "Exorcism",
+    "Summary": "Purifier un villageois touché par le miasme avant que la corruption ne se propage.",
+    "SeriousIntro": "Le regard de la victime s'est déjà assombri. Le temps presse.",
+    "WtfIntro": "La « victime » jure qu'elle passe juste une mauvaise matinée. Ce n'est clairement pas le cas."
+  },
+  {
+    "Type": "Exorcism",
+    "Summary": "Purifier un sanctuaire corrompu avant qu'il n'empoisonne l'approvisionnement en eau voisin.",
+    "SeriousIntro": "Les gravures du sanctuaire semblent onduler faiblement sous la lumière des torches. Mauvais signe.",
+    "WtfIntro": "Le sanctuaire est maintenant couvert de graffitis. C'est étrangement le détail le moins inquiétant."
+  },
+  {
+    "Type": "Exorcism",
+    "Summary": "Libérer un ancien camarade d'armes tombé sous l'emprise du miasme.",
+    "SeriousIntro": "Reconnaître ce visage sous la corruption rend la tâche plus difficile encore.",
+    "WtfIntro": "L'ancien camarade insiste pour dire qu'il « gère très bien la situation ». Il ne gère rien du tout."
+  },
+  {
+    "Type": "DungeonExploration",
+    "Summary": "Cartographier une vieille ruine où l'on dit que des reliques d'avant Tartaros sont enfouies.",
+    "SeriousIntro": "Les couloirs s'enfoncent bien plus profondément que ne le laissait penser le dernier relevé.",
+    "WtfIntro": "Quelqu'un a déjà pillé l'entrée et laissé un petit mot de remerciement."
+  },
+  {
+    "Type": "DungeonExploration",
+    "Summary": "Enquêter sur d'étranges bruits signalés près d'un puits de mine abandonné.",
+    "SeriousIntro": "Les bruits ont cessé dès l'arrivée du groupe. Ce n'est pas rassurant, c'est inquiétant.",
+    "WtfIntro": "Le bruit s'avère être un blaireau particulièrement imposant et très content de lui."
+  },
+  {
+    "Type": "DungeonExploration",
+    "Summary": "Explorer une crypte oubliée avant qu'un groupe rival de chasseurs de trésors n'y arrive.",
+    "SeriousIntro": "L'air y est immobile depuis trop longtemps pour que ce soit naturel.",
+    "WtfIntro": "Un panneau à l'entrée indique « Propriété privée — les fantômes ont réservé pour la semaine »."
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "Type": "Warrior",
+    "HealthPoints": 40,
+    "BaseSuccessRate": 55,
+    "IsSupport": false,
+    "GroupMultiplier": 1.0
+  },
+  {
+    "Type": "Healer",
+    "HealthPoints": 28,
+    "BaseSuccessRate": 50,
+    "IsSupport": true,
+    "GroupMultiplier": 1.2
+  },
+  {
+    "Type": "Mage",
+    "HealthPoints": 22,
+    "BaseSuccessRate": 52,
+    "IsSupport": false,
+    "GroupMultiplier": 1.0
+  }
+]
