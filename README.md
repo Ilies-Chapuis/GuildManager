@@ -162,6 +162,4 @@ The server listens on `http://localhost:5211` (the address the game uses can be 
 - ⚠️ The WPF game screens (quests, recruiting, etc.) run on the local logic (solo mode) and don't call the API yet, so the full online game isn't playable from the interface.
 - ⚠️ The server-side rules are a simplified version of the solo ones (lower gold and XP rewards, no food cost per quest, simpler boss fight). They should be aligned if the online mode is pursued.
 
-## Additional documentation
 
-See [`guide_soutenance.md`](./guide_soutenance.md) (in French) for a detailed, class-by-class and method-by-method explanation of all the game logic — useful to prepare for or follow the defense. The previous French version of this README is kept as [`README.fr.md`](./README.fr.md).
