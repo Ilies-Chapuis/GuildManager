@@ -29,8 +29,6 @@ public partial class RecrutementsPage1View : UserControl
 
         Adventurer recruit = AdventurerFactory.CreateRecruit(type, name);
 
-        guild.RecruitAdventurer(recruit);
-
         UnitDetailsView detailsView = new UnitDetailsView(recruit);
 
         Window window = new Window
