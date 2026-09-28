@@ -1,0 +1,72 @@
+@host = http://localhost:5211
+
+# Walk-through of the whole online flow against the running API + PostgreSQL.
+# Run the requests in order (VS Code "REST Client" extension, or Visual
+# Studio's HTTP editor). IDs below assume a freshly created database: the
+# first player/guild/adventurer/quest get id 1, the next ones 2, 3...
+
+### 1. Register a player (creates a row in the "players" table)
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{ "username": "melvin", "email": "melvin@example.com", "password": "secret123" }
+
+### 2. Log in (same credentials)
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{ "username": "melvin", "password": "secret123" }
+
+### 3. Create a guild (starts with 500 gold, 20 food, 10 potions)
+POST {{host}}/guilds
+Content-Type: application/json
+
+{ "playerId": 1, "name": "Guilde de Tartaros" }
+
+### 4. Recruit adventurers (ids 1, 2, 3)
+POST {{host}}/guilds/1/adventurers
+Content-Type: application/json
+
+{ "playerId": 1, "name": "Bram", "category": "Warrior" }
+
+###
+POST {{host}}/guilds/1/adventurers
+Content-Type: application/json
+
+{ "playerId": 1, "name": "Elara", "category": "Healer" }
+
+###
+POST {{host}}/guilds/1/adventurers
+Content-Type: application/json
+
+{ "playerId": 1, "name": "Sameth", "category": "Special", "specialKey": "Sameth" }
+
+### 5. A special adventurer can't be recruited twice in the same guild (expects 409 Conflict)
+POST {{host}}/guilds/1/adventurers
+Content-Type: application/json
+
+{ "playerId": 1, "name": "Sameth bis", "category": "Special", "specialKey": "Sameth" }
+
+### 6. List the guild's adventurers
+GET {{host}}/guilds/1/adventurers
+
+### 7. Let the API generate today's quests (generation is done server-side)
+POST {{host}}/guilds/1/quests/generate
+
+### 8. List today's quests
+GET {{host}}/guilds/1/quests?day=1&playerId=1
+
+### 9. Send a team on quest 1 (Escort, needs a Warrior)
+POST {{host}}/quests/1/attempt
+Content-Type: application/json
+
+{ "adventurerIds": [1, 2] }
+
+### 10. Check the shared guild state (gold/food/hours updated in the database)
+GET {{host}}/guilds/1
+
+### 11. Advance to the next day
+POST {{host}}/guilds/1/advance-day
+
+### 12. Evaluate the ending (only meaningful from day 10 on)
+POST {{host}}/guilds/1/evaluate-ending

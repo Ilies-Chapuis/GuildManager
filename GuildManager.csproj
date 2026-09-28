@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -6,6 +6,57 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Ico\Logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Menu.png" />
+    <Resource Include="Assets\Guild_sprites.png" />
+    <Resource Include="Assets\Menu_quetes.png" />
+    <Resource Include="Assets\Inventaire.png" />
+    <Resource Include="Assets\Recrutements.png" />
+    <Resource Include="Assets\Menu_quetes2.png" />
+    <Resource Include="Assets\Ruines.png" />
+    <Resource Include="Assets\Options.png" />
+    <Resource Include="Assets\Guerrier(sprites).png" />
+    <Resource Include="Assets\Healer(sprites).png" />
+    <Resource Include="Assets\Mage_Noir(sprites).png" />
+    <Resource Include="Assets\Sameth(sprites).png" />
+    <Resource Include="Assets\Meloap(sprites).png" />
+    <Resource Include="Assets\Elowen(sprites).png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Logic\GuildManager.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Logic/Demo/Graphic are separate projects referenced above;
+         this stops this project from recompiling them itself via its own glob. -->
+    <Compile Remove="Logic\**;Demo\**;Graphic\**;Tests\**" />
+    <EmbeddedResource Remove="Logic\**;Demo\**;Graphic\**;Tests\**" />
+    <None Remove="Logic\**;Demo\**;Graphic\**;Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Logic\Data\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Dialogue system assets (portraits, boxes, CG scenes): read from
+         disk by PortraitLibrary (not pack URIs), so copied next to the
+         exe instead of embedded as Resource. -->
+    <None Include="Assets\Portraits\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\DialogueBoxes\**\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\Scenes\**\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

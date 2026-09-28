@@ -1,0 +1,43 @@
+using System;
+
+namespace GuildManager.Logic.Gameplay;
+
+// Day/hour cycle for the guild 
+public sealed class DayCycle
+{
+    public const int HoursPerDay = 16;
+    public const int FinalDay = 10;
+
+    public int CurrentDay { get; private set; } = 1;
+    public int RemainingHours { get; private set; } = HoursPerDay;
+
+    public bool IsDayOver => RemainingHours <= 0;
+    public bool IsGameOver => CurrentDay > FinalDay;
+
+    // Consumes a quest's hours if the remaining budget allows it.
+    public bool ConsumeHours(int durationHours)
+    {
+        if (durationHours <= 0 || durationHours > RemainingHours)
+            return false;
+
+        RemainingHours -= durationHours;
+        return true;
+    }
+
+    // Moves to the next day and resets the hour budget to 16.
+    public void AdvanceToNextDay()
+    {
+        if (IsGameOver)
+            throw new InvalidOperationException("The game is already over (past day 10).");
+
+        CurrentDay++;
+        RemainingHours = HoursPerDay;
+    }
+
+    // Reinjects a previously saved state (see SaveManager).
+    public void RestoreState(int day, int remainingHours)
+    {
+        CurrentDay = day;
+        RemainingHours = remainingHours;
+    }
+}

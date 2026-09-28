@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/API/">
+    <Project Path="Logic/API/GuildManager.Api/GuildManager.Api.csproj" />
+  </Folder>
+  <Folder Name="/Demo/">
+    <Project Path="Demo/GuildManager.Demo.csproj" />
+  </Folder>
+  <Folder Name="/Graphic/">
+    <Project Path="Graphic/GuildManager.Graphic.csproj" />
+  </Folder>
+  <Folder Name="/Logic/">
+    <Project Path="Logic/GuildManager.Logic.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/GuildManager.Tests.csproj" />
+  </Folder>
+  <Project Path="GuildManager.csproj" />
+</Solution>

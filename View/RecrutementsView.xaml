@@ -1,0 +1,140 @@
+<UserControl x:Class="GuildManager.UI.Recrutments.RecrutementsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager">
+
+        <UserControl.Resources>
+            <Style x:Key="RecrutmentsBackButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Georgia" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="Background" Value="#D8C08A" />
+                <Setter Property="BorderBrush" Value="#8B6F3E" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Padding" Value="15,5" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0" >
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="RecruitLabelStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI Emoji, Georgia" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="TextAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+
+            <Style x:Key="RecruitPortraitStyle" TargetType="Image">
+                <Setter Property="Width" Value="70" />
+                <Setter Property="Height" Value="70" />
+                <Setter Property="Stretch" Value="UniformToFill" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+        </UserControl.Resources>
+
+        <Grid Background="#05030A">
+            <Viewbox Stretch="Uniform">
+                <Grid Width="1253" Height="705">
+                    <Image x:Name="Menu_quêtes"
+                        Source="/GuildManager;component/Assets/Recrutements.png"
+                        Stretch="Fill"
+                        Width="1253"
+                        Height="705" />
+
+                    <Button
+                        Content="Retour"
+                        Click="ReturnButton_Click"
+                        Style="{StaticResource RecrutmentsBackButtonStyle}"
+                        Width="150"
+                        Height="50"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="30" />
+
+                    <Canvas>
+                        <TextBlock x:Name="StatusText"
+                                   Canvas.Left="240" Canvas.Top="150"
+                                   FontFamily="Georgia" FontSize="14" Foreground="#B33" />
+
+                        <!-- Only 6 candidates per day: the last 2 slots
+                             of the 4x2 grid stay empty/hidden. -->
+
+                        <Button x:Name="Unit1Button"
+                            Width="345" Height="80" Canvas.Left="250" Canvas.Top="200"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit1Button_Click" />
+                        <Image x:Name="Unit1Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="255" Canvas.Top="205" />
+                        <TextBlock x:Name="Unit1Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="255" Height="70" Canvas.Left="335" Canvas.Top="205" />
+
+                        <Button x:Name="Unit2Button"
+                            Width="345" Height="80" Canvas.Left="250" Canvas.Top="285"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit2Button_Click" />
+                        <Image x:Name="Unit2Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="255" Canvas.Top="290" />
+                        <TextBlock x:Name="Unit2Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="255" Height="70" Canvas.Left="335" Canvas.Top="290" />
+
+                        <Button x:Name="Unit3Button"
+                            Width="355" Height="80" Canvas.Left="240" Canvas.Top="370"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit3Button_Click" />
+                        <Image x:Name="Unit3Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="245" Canvas.Top="375" />
+                        <TextBlock x:Name="Unit3Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="265" Height="70" Canvas.Left="325" Canvas.Top="375" />
+
+                        <Button x:Name="Unit4Button"
+                            Width="345" Height="80" Canvas.Left="240" Canvas.Top="457"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit4Button_Click" />
+                        <Image x:Name="Unit4Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="245" Canvas.Top="462" />
+                        <TextBlock x:Name="Unit4Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="255" Height="70" Canvas.Left="325" Canvas.Top="462" />
+
+                        <Button x:Name="Unit5Button"
+                            Width="345" Height="80" Canvas.Left="655" Canvas.Top="200"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit5Button_Click" />
+                        <Image x:Name="Unit5Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="660" Canvas.Top="205" />
+                        <TextBlock x:Name="Unit5Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="255" Height="70" Canvas.Left="740" Canvas.Top="205" />
+
+                        <Button x:Name="Unit6Button"
+                            Width="350" Height="80" Canvas.Left="655" Canvas.Top="285"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                            Click="Unit6Button_Click" />
+                        <Image x:Name="Unit6Portrait" Style="{StaticResource RecruitPortraitStyle}"
+                            Canvas.Left="660" Canvas.Top="290" />
+                        <TextBlock x:Name="Unit6Text" Style="{StaticResource RecruitLabelStyle}"
+                            Width="260" Height="70" Canvas.Left="740" Canvas.Top="290" />
+
+                    </Canvas>
+                </Grid>
+            </Viewbox>
+        </Grid>
+</UserControl>

@@ -1,0 +1,134 @@
+<UserControl x:Class="GuildManager.UI.Inventory.InventoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager">
+
+        <UserControl.Resources>
+            <Style x:Key="InventoryBackButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="Georgia" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="#3D2E18" />
+                <Setter Property="Background" Value="#D8C08A" />
+                <Setter Property="BorderBrush" Value="#8B6F3E" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Padding" Value="15,5" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+            </Style>
+
+            <!-- An exchange "item" placed in a grid slot: icon + small rate
+                 text, clickable. Transparent background so the slot frame
+                 already drawn in Inventaire.png stays visible. -->
+            <Style x:Key="TradeSlotButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                <ContentPresenter />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TradeSlotIconStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI Emoji" />
+                <Setter Property="FontSize" Value="34" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+
+            <Style x:Key="TradeSlotIconBackgroundStyle" TargetType="Ellipse">
+                <Setter Property="Width" Value="52" />
+                <Setter Property="Height" Value="52" />
+                <Setter Property="Fill" Value="#D8C08A" />
+                <Setter Property="Stroke" Value="#8B6F3E" />
+                <Setter Property="StrokeThickness" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+
+            <Style x:Key="TradeSlotCaptionStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI Emoji, Georgia" />
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="#D8C08A" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+            </Style>
+        </UserControl.Resources>
+
+        <Grid Background="#05030A">
+            <Viewbox Stretch="Uniform">
+                <Grid Width="1253" Height="705">
+                    <Image x:Name="Menu_quêtes"
+                        Source="/GuildManager;component/Assets/Inventaire.png"
+                        Stretch="Fill"
+                        Width="1253"
+                        Height="705" />
+
+                    <Button
+                        Content="Retour"
+                        Click="ReturnButton_Click"
+                        Style="{StaticResource InventoryBackButtonStyle}"
+                        Width="150"
+                        Height="50"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="30" />
+
+                    <Canvas>
+                        <!-- Current resources, above the whole frame
+                             (the frame itself starts around Canvas.Top=93). -->
+                        <Border Canvas.Left="426" Canvas.Top="14"
+                                Width="400" Height="34"
+                                Background="#DD05030A" BorderBrush="#8B6F3E" BorderThickness="1" CornerRadius="4">
+                            <TextBlock x:Name="ResourcesText"
+                                       FontFamily="Segoe UI Emoji, Georgia" FontSize="15" FontWeight="Bold"
+                                       Foreground="#D8C08A"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!-- Grid slot 1 (col 0, row 0): gold -> food -->
+                        <Button x:Name="FoodTradeButton"
+                                Canvas.Left="294" Canvas.Top="156"
+                                Width="74" Height="69"
+                                Style="{StaticResource TradeSlotButtonStyle}"
+                                Click="TradeGoldForFoodButton_Click"
+                                ToolTip="10 or → 5 nourriture">
+                            <Grid>
+                                <Ellipse Style="{StaticResource TradeSlotIconBackgroundStyle}" VerticalAlignment="Top" Margin="0,2,0,0" />
+                                <TextBlock Text="🍞" Style="{StaticResource TradeSlotIconStyle}" VerticalAlignment="Top" Margin="0,6,0,0" />
+                                <TextBlock Text="10💰→5" Style="{StaticResource TradeSlotCaptionStyle}" VerticalAlignment="Bottom" Margin="0,0,0,2" />
+                            </Grid>
+                        </Button>
+
+                        <!-- Grid slot 2 (col 1, row 0): gold -> potion -->
+                        <Button x:Name="PotionTradeButton"
+                                Canvas.Left="368" Canvas.Top="156"
+                                Width="74" Height="69"
+                                Style="{StaticResource TradeSlotButtonStyle}"
+                                Click="TradeGoldForPotionButton_Click"
+                                ToolTip="40 or → 1 potion de vie">
+                            <Grid>
+                                <Ellipse Style="{StaticResource TradeSlotIconBackgroundStyle}" VerticalAlignment="Top" Margin="0,2,0,0" />
+                                <TextBlock Text="🧪" Style="{StaticResource TradeSlotIconStyle}" VerticalAlignment="Top" Margin="0,6,0,0" />
+                                <TextBlock Text="40💰→1" Style="{StaticResource TradeSlotCaptionStyle}" VerticalAlignment="Bottom" Margin="0,0,0,2" />
+                            </Grid>
+                        </Button>
+
+                        <TextBlock x:Name="StatusText"
+                                   Canvas.Left="294" Canvas.Top="508"
+                                   Width="595" FontFamily="Georgia" FontSize="13"
+                                   Foreground="#9fd99f" TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </Canvas>
+                </Grid>
+            </Viewbox>
+        </Grid>
+</UserControl>

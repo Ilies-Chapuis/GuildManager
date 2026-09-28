@@ -1,0 +1,182 @@
+<UserControl x:Class="GuildManager.UI.Dialogues.DialoguesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuildManager"
+        mc:Ignorable="d"
+        Focusable="True">
+
+    <UserControl.Resources>
+
+        <Style x:Key="Quest2BackButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Georgia" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="#3D2E18" />
+            <Setter Property="Background" Value="#D8C08A" />
+            <Setter Property="BorderBrush" Value="#8B6F3E" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding" Value="15,5" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="QuestBossBackButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Georgia" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Foreground" Value="#3D2E18" />
+            <Setter Property="Background" Value="#D8C08A" />
+            <Setter Property="BorderBrush" Value="#8B6F3E" />
+            <Setter Property="BorderThickness" Value="3" />
+        </Style>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!-- Blinking "continue" indicator (bottom-right triangle of the box) -->
+        <Storyboard x:Key="BlinkStoryboard" RepeatBehavior="Forever" AutoReverse="True">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0.15" Duration="0:0:0.6" />
+        </Storyboard>
+
+        <Style x:Key="ContinueIndicatorStyle" TargetType="TextBlock">
+            <Setter Property="Text" Value="&#9660;" />
+            <Setter Property="Foreground" Value="#3D2E18" />
+            <Setter Property="FontSize" Value="16" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsTyping}" Value="False">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard x:Name="BlinkBeginStoryboard" Storyboard="{StaticResource BlinkStoryboard}" />
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <StopStoryboard BeginStoryboardName="BlinkBeginStoryboard" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <!-- Clicking anywhere / pressing space advances the dialogue -->
+    <Grid Background="#05030A"
+          MouseLeftButtonDown="Root_MouseLeftButtonDown"
+          KeyDown="Root_KeyDown">
+
+        <!-- ============================================================= -->
+        <!-- MODE 1: full-screen CG scene (boss fights, e.g. Grendel / Nyxaria) -->
+        <!-- ============================================================= -->
+        <Viewbox Stretch="Uniform" Visibility="{Binding IsSceneMode, Converter={StaticResource BoolToVis}}">
+            <Canvas Width="{Binding SceneCanvasWidth}" Height="{Binding SceneCanvasHeight}">
+
+                <Image Source="{Binding SceneBackground}"
+                       Width="{Binding SceneCanvasWidth}"
+                       Height="{Binding SceneCanvasHeight}"
+                       Stretch="Fill" />
+
+                <!-- Panel drawn by us, only when the CG doesn't already have its own built-in box -->
+                <Border Canvas.Left="{Binding SceneTextX}"
+                        Canvas.Top="{Binding SceneTextY}"
+                        Width="{Binding SceneTextWidth}"
+                        Height="{Binding SceneTextHeight}"
+                        Visibility="{Binding SceneNeedsOwnBox, Converter={StaticResource BoolToVis}}"
+                        Background="#DD0B0F1A"
+                        BorderBrush="#9AA3B5"
+                        BorderThickness="2"
+                        CornerRadius="4" />
+
+                <!-- Name + text, positioned within the rectangle measured in the CG -->
+                <Grid Canvas.Left="{Binding SceneTextX}"
+                      Canvas.Top="{Binding SceneTextY}"
+                      Width="{Binding SceneTextWidth}"
+                      Height="{Binding SceneTextHeight}"
+                      Margin="16,10,16,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding CharacterDisplayName}"
+                               FontFamily="Georgia"
+                               FontWeight="Bold"
+                               FontSize="17"
+                               Foreground="#C9A94E"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,0,0,4" />
+
+                    <TextBlock Grid.Row="1"
+                               Text="{Binding DisplayedText}"
+                               TextWrapping="Wrap"
+                               FontFamily="Georgia"
+                               FontSize="17"
+                               Foreground="#F1EEE3"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+            </Canvas>
+        </Viewbox>
+
+        <!-- ============================================================= -->
+        <!-- MODE 2: classic bottom-of-screen dialogue box (FE style) -->
+        <!-- ============================================================= -->
+        <Grid Visibility="{Binding IsBottomBarMode, Converter={StaticResource BoolToVis}}">
+
+            <!-- Portrait: overflows above the box, like in FE Awakening -->
+            <Image Source="{Binding PortraitSource}"
+                   Width="300" Height="330"
+                   Stretch="Uniform"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="60,0,0,310"
+                   Panel.ZIndex="2">
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="18" ShadowDepth="4" Opacity="0.55" Color="Black" />
+                </Image.Effect>
+            </Image>
+
+            <!-- Dialogue box -->
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Bottom"
+                  Margin="40,0,40,40"
+                  Height="260"
+                  Panel.ZIndex="1">
+
+                <Image Source="{Binding BoxSkinSource}" Stretch="Fill" />
+
+                <!-- Text area, with margin to stay inside the PNG's ornate frame -->
+                <Grid Margin="160,55,90,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding CharacterDisplayName}"
+                               FontFamily="Georgia"
+                               FontWeight="Bold"
+                               FontSize="22"
+                               Foreground="#3D2E18"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               Margin="0,0,0,6" />
+
+                    <TextBlock Grid.Row="1"
+                               Text="{Binding DisplayedText}"
+                               TextWrapping="Wrap"
+                               FontFamily="Georgia"
+                               FontSize="19"
+                               Foreground="#2A1F10"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Grid>
+
+                <!-- "Continue" indicator -->
+                <TextBlock Style="{StaticResource ContinueIndicatorStyle}"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,50,22" />
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>

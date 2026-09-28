@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- GuildManager.Api is a separate ASP.NET Core project that lives
+         physically under this folder. Without this exclusion, this class
+         library's default glob would try to compile the server's sources
+         (Program.cs, EF Core entities...) itself, and fail. -->
+    <Compile Remove="API\GuildManager.Api\**" />
+    <EmbeddedResource Remove="API\GuildManager.Api\**" />
+    <None Remove="API\GuildManager.Api\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Data\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
