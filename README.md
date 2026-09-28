@@ -65,7 +65,10 @@ Guild_Manager/
 │   ├── MainMenu/                   GameSessionManager (bridge between the logic and the UI)
 │   ├── API/GuildManager.Api/       ASP.NET Core + EF Core server (online mode)
 │   ├── API/*.cs                    Game-side HTTP clients (AuthApiClient, GuildApiClient, QuestApiClient)
+<<<<<<< HEAD
 │   ├── API/Dtos/                   Request/response DTOs shared by the server and the game clients
+=======
+>>>>>>> 36d7a65a2a5d426c90d142dd5831c85c11ca72c1
 │   ├── Database/                   PostgreSQL SQL scripts (schema) + setup-database.ps1
 │   └── Data/                       JSON data (dialogues, quests, names, generic recruits)
 │
@@ -115,7 +118,10 @@ dotnet run --project Demo
 ## Technical choices
 
 - **Logic / UI separation**: `GuildManager.Logic` is a class library with no reference to WPF, referenced by the WPF project (`GuildManager.csproj`), the console harness (`Demo`) and the tests. This lets the game logic be tested and evolved independently of the interface.
+<<<<<<< HEAD
 - **Shared DTOs**: the request/response classes of the API live once, in `Logic/API/Dtos`, and are compiled into both the game (`GuildManager.Logic`) and the server (`GuildManager.Api.csproj` includes `..\Dtos\*.cs`). A change to a JSON shape therefore can't drift between client and server.
+=======
+>>>>>>> 36d7a65a2a5d426c90d142dd5831c85c11ca72c1
 - **`GameSessionManager`**: a single entry point on the UI side to reach the current game, instead of passing a `Guild` instance around between every screen.
 - **JSON saves**: easy to inspect/debug, and sufficient for a local solo mode. File paths are resolved relative to the executable's folder (`AppContext.BaseDirectory`) rather than the current working directory, so they behave the same however the game is launched (IDE, `dotnet run`, double-click).
 - **Separate dialogue system**: `NarrativeManager` (which text, which voice) is independent from the visual display system (`Dialogues/`, Fire Emblem-style portraits and dialogue boxes), so the narration logic stays testable without any UI.
@@ -164,6 +170,10 @@ The server listens on `http://localhost:5211` (the address the game uses can be 
 - ⚠️ The WPF game screens (quests, recruiting, etc.) run on the local logic (solo mode) and don't call the API yet, so the full online game isn't playable from the interface.
 - ⚠️ The server-side rules are a simplified version of the solo ones (lower gold and XP rewards, no food cost per quest, simpler boss fight). They should be aligned if the online mode is pursued.
 
+<<<<<<< HEAD
 ## Additional documentation
 
 See [`guide_soutenance.md`](./guide_soutenance.md) (in French) for a detailed, class-by-class and method-by-method explanation of all the game logic — useful to prepare for or follow the defense. The previous French version of this README is kept as [`README.fr.md`](./README.fr.md).
+=======
+
+>>>>>>> 36d7a65a2a5d426c90d142dd5831c85c11ca72c1
